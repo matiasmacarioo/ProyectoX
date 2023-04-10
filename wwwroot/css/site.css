@@ -48,8 +48,22 @@ body{
   margin-bottom: 20px;
 }
 
-#Input_Email, #Input_Password, #Input_ConfirmPassword{
-  background-color: rgba(255, 255, 255, 0.404);
+ .form-control, .input-group-text{
+  background-color: #ffffff67;
+}
+
+.form-control:disabled, .form-control[readonly] {
+	background-color: #ffffff67;
+	opacity: 1;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+	color: #fff;
+	background-color: #ffffff67;
+}
+
+.nav-pills .nav-link {
+	color: #e4e3e3;
 }
 
 .text-left{
