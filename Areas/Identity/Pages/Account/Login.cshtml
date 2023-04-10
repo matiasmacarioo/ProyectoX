@@ -26,13 +26,15 @@
                     <label asp-for="Input.Password" class="form-label"></label>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
-                <div class="text-left">
+                <div class="text-center">
                     <div class="checkbox">
                         <label asp-for="Input.RememberMe" class="form-label">
                             <input class="form-check-input" asp-for="Input.RememberMe" />
                             @Html.DisplayNameFor(m => m.Input.RememberMe)
                         </label>
-                    </div>
+                    <p>
+                        <a id="forgot-password" asp-page="./ForgotPassword">Olvidé mi contraseña</a>
+                    </p>
                 </div>
                 <div>
                     <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-dark">Iniciar sesión</button>
@@ -41,17 +43,7 @@
             </div>
              
             </div>
-                <div class="text-center">
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Olvidé mi contraseña</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registrarme</a>
-                    </p>
-                    <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Reconfirmar mail</a>
-                    </p>
-                </div>
+
         </section>
     </div>
     @* <div class="col-md-6 col-md-offset-2">

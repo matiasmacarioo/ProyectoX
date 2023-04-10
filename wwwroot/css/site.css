@@ -48,7 +48,7 @@ body{
   margin-bottom: 20px;
 }
 
-#Input_Email, #Input_Password{
+#Input_Email, #Input_Password, #Input_ConfirmPassword{
   background-color: rgba(255, 255, 255, 0.404);
 }
 
@@ -59,17 +59,22 @@ body{
 
 .text-center{
   text-align: center;
+  color: antiquewhite;
 }
 
 .titulo, h1, h2, h3, h4, h5, h6, a{
   color: antiquewhite;
 }
 
+a:hover {
+  color: rgb(252, 244, 233);
+}
+
 p{
   color: rgb(201, 189, 173);
 }
 
-.footer-bg{
+.glass-bg{
   background-size: cover;
   background-color: rgba(255, 255, 255, 0.075);
   -webkit-backdrop-filter: blur(5px);
