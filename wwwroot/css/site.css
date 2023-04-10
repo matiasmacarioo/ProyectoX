@@ -15,17 +15,27 @@ html {
 
 body {
   margin-bottom: 60px;
+  min-height: 100%;
 }
+
+body{
+  background: url(https://fastly.picsum.photos/id/413/1920/1080.jpg?hmac=DTdv_AxnEpp5KQFgpzmi1Ayxj6VLuwonto7bsjVDx9U);
+}
+
+/* .card-bg {
+    background-image  : url(https://fastly.picsum.photos/id/413/1920/1080.jpg?hmac=DTdv_AxnEpp5KQFgpzmi1Ayxj6VLuwonto7bsjVDx9U);
+    background-size: cover  ;
+	  border-radius: 15px;
+} */
 
 .card {
   background-color: rgba(255, 255, 255, 0.075);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10 px);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   padding: 20px;
   margin: auto;   
   margin-top: 50px;
-  border: 1px solid white;
 	border-radius: 15px;
 	padding: 20px 30px 50px 30px; 
 	text-align: center;
@@ -33,14 +43,19 @@ body {
 }
 
 .form-floating {
-  margin-top: 20px;
-  /* margin-bottom: 20px; */
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .text-left{
   text-align: left;
+  color: antiquewhite;
 }
 
 .text-center{
   text-align: center;
+}
+
+.titulo{
+  color: antiquewhite;
 }
