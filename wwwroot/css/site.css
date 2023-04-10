@@ -16,3 +16,31 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.card {
+  background-color: rgba(255, 255, 255, 0.075);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin: auto;   
+  margin-top: 50px;
+  border: 1px solid white;
+	border-radius: 15px;
+	padding: 20px 30px 50px 30px; 
+	text-align: center;
+  position: relative;
+}
+
+.form-floating {
+  margin-top: 20px;
+  /* margin-bottom: 20px; */
+}
+
+.text-left{
+  text-align: left;
+}
+
+.text-center{
+  text-align: center;
+}
