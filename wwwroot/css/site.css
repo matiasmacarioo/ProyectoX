@@ -19,7 +19,8 @@ body {
 }
 
 body{
-  background: url(https://fastly.picsum.photos/id/413/1920/1080.jpg?hmac=DTdv_AxnEpp5KQFgpzmi1Ayxj6VLuwonto7bsjVDx9U);
+  background: url(https://images.unsplash.com/photo-1678834610584-5fd88f44cf0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit);
+  background-size: cover;
 }
 
 /* .card-bg {
@@ -47,6 +48,10 @@ body{
   margin-bottom: 20px;
 }
 
+#Input_Email, #Input_Password{
+  background-color: rgba(255, 255, 255, 0.404);
+}
+
 .text-left{
   text-align: left;
   color: antiquewhite;
@@ -56,6 +61,18 @@ body{
   text-align: center;
 }
 
-.titulo{
+.titulo, h1, h2, h3, h4, h5, h6, a{
   color: antiquewhite;
+}
+
+p{
+  color: rgb(201, 189, 173);
+}
+
+.footer-bg{
+  background-size: cover;
+  background-color: rgba(255, 255, 255, 0.075);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);   
 }
