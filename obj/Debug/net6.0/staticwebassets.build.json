@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "T3DtRCe36KJSkcyYJP4feG+V5G1g9HTCxg5j3uK6xdw=",
+  "Hash": "I7dl9Luo0isCqDo+rb2hga5sEQvKQ1/ePfPihow2A6s=",
   "Source": "ProyectoX",
   "BasePath": "_content/ProyectoX",
   "Mode": "Default",
@@ -1069,6 +1069,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Matias\\Desktop\\ProyectoX\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\ProyectoX.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\Matias\\Desktop\\ProyectoX\\wwwroot\\css\\photo.jpg",
+      "SourceId": "ProyectoX",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Matias\\Desktop\\ProyectoX\\wwwroot\\",
+      "BasePath": "_content/ProyectoX",
+      "RelativePath": "css/photo.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\photo.jpg"
     },
     {
       "Identity": "C:\\Users\\Matias\\Desktop\\ProyectoX\\wwwroot\\css\\site.css",

@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\ProyectoX.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Matias\\Desktop\\ProyectoX\\wwwroot\\css\\photo.jpg",
+      "PackagePath": "staticwebassets\\css\\photo.jpg"
+    },
+    {
       "Id": "C:\\Users\\Matias\\Desktop\\ProyectoX\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
