@@ -80,6 +80,14 @@ body{
   color: antiquewhite;
 }
 
+h1, h3, .nav-link{
+  font-weight: bold;
+}
+
+.active{
+  font-weight: 900;
+}
+
 a:hover {
   color: rgb(252, 244, 233);
 }
@@ -94,4 +102,8 @@ p{
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);   
+}
+
+.navbar-brand {
+  font-weight: bold;
 }
