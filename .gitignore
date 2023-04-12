@@ -51,6 +51,7 @@ dkms.conf
 #Carpetas que no se suben
 *bin
 *vscode
-obj/Debug/net6.0/project.razor.json
-obj/Debug/net6.0/proyectoX.GeneratedMSBuildEditorConfig.editorconfig
-obj/Debug/net6.0/proyectoX.assets.cache
+*obj/Debug/net6.0
+# obj/Debug/net6.0/project.razor.json
+# obj/Debug/net6.0/proyectoX.GeneratedMSBuildEditorConfig.editorconfig
+# obj/Debug/net6.0/proyectoX.assets.cache
