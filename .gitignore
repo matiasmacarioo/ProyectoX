@@ -51,6 +51,3 @@ dkms.conf
 #Carpetas que no se suben
 *bin
 *vscode
-obj/Debug/net7.0/project.razor.json
-obj/Debug/net7.0/Airbnb.GeneratedMSBuildEditorConfig.editorconfig
-obj/Debug/net7.0/Airbnb.assets.cache
