@@ -28,6 +28,9 @@
                     <label asp-for="Input.ConfirmPassword"></label>
                     <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                 </div>
+                    <p>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="Espacio">Reenviar confirmación</a>
+                    </p>
                 <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-dark acciones">Registrar</button>
             </form>
         </div>
