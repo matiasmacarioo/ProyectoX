@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9HcGfjTYsB6rIavGRX8V1Ttp6HxIoinfnCxRKC+jDikUw7sGdSrnPc1SSyG7keJPnouGO3tTWH1kChS/ZJeMig==",
+  "dgSpecHash": "TlB4p7G7HZ6gg+XoM+vc5Uo30tOzDi1GpKf1CR2RmnMOVwLQmHLIAt5ntJFb4B3MaY/eiFglkjQZrE8gv39PJg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Matias\\Desktop\\ProyectoX\\ProyectoX.csproj",
+  "projectFilePath": "C:\\Users\\Matias\\ProyectoX\\ProyectoX.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Matias\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Matias\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
@@ -191,11 +191,7 @@
     "C:\\Users\\Matias\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\Matias\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\Matias\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\Matias\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\Matias\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.16\\microsoft.netcore.app.ref.6.0.16.nupkg.sha512",
-    "C:\\Users\\Matias\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.16\\microsoft.windowsdesktop.app.ref.6.0.16.nupkg.sha512",
-    "C:\\Users\\Matias\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.16\\microsoft.aspnetcore.app.ref.6.0.16.nupkg.sha512",
-    "C:\\Users\\Matias\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.16\\microsoft.netcore.app.host.win-x64.6.0.16.nupkg.sha512"
+    "C:\\Users\\Matias\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

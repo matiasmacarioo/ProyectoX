@@ -10755,11 +10755,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Matias\\Desktop\\ProyectoX\\ProyectoX.csproj",
+      "projectUniqueName": "C:\\Users\\Matias\\ProyectoX\\ProyectoX.csproj",
       "projectName": "ProyectoX",
-      "projectPath": "C:\\Users\\Matias\\Desktop\\ProyectoX\\ProyectoX.csproj",
+      "projectPath": "C:\\Users\\Matias\\ProyectoX\\ProyectoX.csproj",
       "packagesPath": "C:\\Users\\Matias\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Matias\\Desktop\\ProyectoX\\obj\\",
+      "outputPath": "C:\\Users\\Matias\\ProyectoX\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Matias\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10834,24 +10834,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.16, 6.0.16]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[6.0.16, 6.0.16]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.16, 6.0.16]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[6.0.16, 6.0.16]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
