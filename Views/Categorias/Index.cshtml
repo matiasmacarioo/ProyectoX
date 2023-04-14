@@ -5,48 +5,49 @@
 
 <!-- Modal -->
 <div class="modal fade" id="ModalCategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Agregar Categoria</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <input type="hidden" id="CategoriaID" value="0" />
-        <div>
-            <label class="control-label">Categoria</label>
-            <input type="text" class="form-control" id="Descripcion" autocomplete="off" />
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Categoria</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="CategoriaID" value="0" />
+                <div>
+                    <label class="control-label text-light">Categoria</label>
+                    <input type="text" class="form-control" id="Descripcion" autocomplete="off" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="GuardarCategoria()" class="btn btn-dark text-light">Guardar
+                    Cambios</button>
+            </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" onclick="GuardarCategoria()" class="btn btn-primary">Guardar Cambios</button>
-      </div>
     </div>
-  </div>
 </div>
 
 
 <div>
     <h1 class="display-4">Categorias</h1>
 
-      <!-- Button trigger modal -->
-      <div class="mb-2">
-        <button type="button" onclick="VaciarFormulario()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalCategoria">
-            Nuevo
+    <!-- Button trigger modal -->
+    <div class="mb-2">
+        <button type="button" onclick="VaciarFormulario()" class="btn btn-dark" data-bs-toggle="modal"
+            data-bs-target="#ModalCategoria">
+            Nueva
         </button>
-      </div>
-
- 
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-        <tr>
-            <th>Descripcion</th>
-        </tr>
-    </thead>
-        <tbody id="tbody-categorias">        
+    </div>
+    <table class="table table-bordered table-striped table-condensed glass-bg table-responsive table-rounded">
+        <thead>
+            <tr>
+                <th class="text-white col-md-11">Descripcion</th>
+                <th class="text-light text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tbody-categorias">
         </tbody>
-  </table>
+    </table>
 </div>
 
 
