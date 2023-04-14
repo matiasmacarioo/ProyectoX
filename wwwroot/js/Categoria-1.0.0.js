@@ -14,7 +14,8 @@ function BuscarCategorias(){
             <tr>
               <td class="text-light " >${categoria.descripcion}</td>
               <td class="text-light text-center">
-                <button class="btn btn-dark btn-sm" onClick="BuscarCategoria(${categoria.categoriaID})">Editar</button>
+                <button class="btn btn-dark btn-sm" onClick="BuscarCategoria(${categoria.categoriaID})">Editar</button> |
+                <button class="btn btn-dark btn-sm" onClick="DeshabilitarCategoria(${categoria.categoriaID})">Deshabilitar</button>
               </td>
             </tr>
           `);
@@ -97,4 +98,26 @@ function GuardarCategoria() {
             alert('Disculpe, existió un problema');
         }
     });
+}
+
+function DeshabilitarCategoria() {
+  let categoriaID = $("#CategoriaID").val();
+
+  $.ajax({
+      url: '../../Categorias/DeshabilitarCategoria',
+      data: {
+          categoriaID: categoriaID
+      },
+      type: 'POST',
+      dataType: 'json',
+      success: function(resultado) {
+          if (resultado) {
+              BuscarCategorias();
+          } else {
+          }
+      },
+      error: function(xhr, status) {
+          alert('Disculpe, existió un problema');
+      }
+  });
 }
