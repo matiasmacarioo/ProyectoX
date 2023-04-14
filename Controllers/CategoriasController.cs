@@ -26,7 +26,8 @@ public class CategoriasController : Controller
     {
         var categorias = _contexto.Categorias.ToList();
 
-        if (categoriaID > 0) {
+        if (categoriaID > 0)
+        {
             categorias = categorias.Where(c => c.CategoriaID == categoriaID).OrderBy(c => c.Descripcion).ToList();
         }
 
@@ -37,46 +38,53 @@ public class CategoriasController : Controller
     {
         bool resultado = false;
 
-        if (!string.IsNullOrEmpty(descripcion)){
+        if (!string.IsNullOrEmpty(descripcion))
+        {
 
-               
-                        //SI ES 0 QUIERE DECIR QUE ESTA CREANDO LA CATEGORIA
-                    if(categoriaID == 0){
-                        //BUSCAMOS EN LA TABLA SI EXISTE UNA CON LA MISMA DESCRIPCION
-                        var categoriaOriginal = _contexto.Categorias.Where(c => c.Descripcion == descripcion).FirstOrDefault();
-                if(categoriaOriginal == null){
-                      //DECLAMOS EL OBJETO DANDO EL VALOR
-                        var categoriaGuardar = new Categoria{
-                            Descripcion = descripcion
-                        };
-                        _contexto.Add(categoriaGuardar);
-                        _contexto.SaveChanges();
-                        resultado = true;
+
+            //SI ES 0 QUIERE DECIR QUE ESTA CREANDO LA CATEGORIA
+            if (categoriaID == 0)
+            {
+                //BUSCAMOS EN LA TABLA SI EXISTE UNA CON LA MISMA DESCRIPCION
+                var categoriaOriginal = _contexto.Categorias.Where(c => c.Descripcion == descripcion).FirstOrDefault();
+                if (categoriaOriginal == null)
+                {
+                    //DECLAMOS EL OBJETO DANDO EL VALOR
+                    var categoriaGuardar = new Categoria
+                    {
+                        Descripcion = descripcion
+                    };
+                    _contexto.Add(categoriaGuardar);
+                    _contexto.SaveChanges();
+                    resultado = true;
 
                 }
 
-                     
+
+            }
+            else
+            {
+                //BUSCAMOS EN LA TABLA SI EXISTE UNA CON LA MISMA DESCRIPCION Y DISTINTO ID DE REGISTRO AL QUE ESTAMOS EDITANDO
+                var categoriaOriginal = _contexto.Categorias.Where(c => c.Descripcion == descripcion && c.CategoriaID != categoriaID).FirstOrDefault();
+                if (categoriaOriginal == null)
+                {
+                    //crear variable que guarde el objeto segun el id deseado
+                    var categoriaEditar = _contexto.Categorias.Find(categoriaID);
+                    if (categoriaEditar != null)
+                    {
+                        categoriaEditar.Descripcion = descripcion;
+                        _contexto.SaveChanges();
+                        resultado = true;
                     }
-                    else{
-                        //BUSCAMOS EN LA TABLA SI EXISTE UNA CON LA MISMA DESCRIPCION Y DISTINTO ID DE REGISTRO AL QUE ESTAMOS EDITANDO
-                        var categoriaOriginal = _contexto.Categorias.Where(c => c.Descripcion == descripcion && c.CategoriaID != categoriaID).FirstOrDefault();
-                        if(categoriaOriginal == null){
-                            //crear variable que guarde el objeto segun el id deseado
-                            var categoriaEditar = _contexto.Categorias.Find(categoriaID);
-                            if(categoriaEditar != null){
-                                categoriaEditar.Descripcion = descripcion;
-                                _contexto.SaveChanges();
-                                 resultado = true;
-                            }
-                        }
-                       
-           
-                        }                          
+                }
+
+
+            }
         }
 
         return Json(resultado);
     }
 
 
-   
+
 }
