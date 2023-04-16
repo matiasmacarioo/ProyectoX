@@ -20,6 +20,7 @@ body {
 
 body{
   background: url(photo.jpg);
+  background-color: rgb(36, 36, 36);
   background-size: cover;
 }
 
@@ -114,7 +115,6 @@ p{
 }
 
 .glass-bg:hover {
-  background-color: #ffffff1c;
   filter: saturate(1.2);
 }
 
