@@ -30,18 +30,26 @@ body{
 } */
 
 .card {
-  background-color: rgba(255, 255, 255, 0.075);
+  background-color: #ffffff13;
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10 px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   padding: 20px;
-  margin: auto;   
+  margin: auto;
   margin-top: 50px;
-	border-radius: 15px;
-	padding: 20px 30px 50px 30px; 
-	text-align: center;
+  border-radius: 15px;
+  padding: 20px 30px 50px 30px;
+  text-align: center;
   position: relative;
+  transition: background-color 0.3s ease-in-out;
 }
+
+.card:hover {
+  background-color: #ffffff1c;
+  filter: saturate(1.4);
+}
+
+
 
 .form-floating {
   margin-top: 10px;
@@ -101,7 +109,13 @@ p{
   background-color: rgba(255, 255, 255, 0.075);
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);   
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease-in;
+}
+
+.glass-bg:hover {
+  background-color: #ffffff1c;
+  filter: saturate(1.2);
 }
 
 .navbar-brand {
@@ -116,7 +130,8 @@ p{
 }
 
 .btn-dark{
-  border-color: rgb(128, 119, 105);
+  /* border-color: rgb(36, 36, 36); */
+  background-color: rgb(36, 36, 36);
 }
 
 .table{
@@ -128,6 +143,15 @@ p{
   border-spacing: 0 4px;
   --bs-table-striped-bg: rgba(78, 75, 75, 0.3);
 }
+
+.table > tbody > tr {
+  transition: background-color 0.3s ease-in-out;
+}
+
+.table > tbody > tr:hover {
+  background-color: rgba(0, 0, 0, 0.212);
+}
+
 
 .display-4{
   font-weight: 600;
