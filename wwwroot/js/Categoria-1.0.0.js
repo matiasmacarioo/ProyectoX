@@ -10,15 +10,19 @@ function BuscarCategorias() {
     success: function (categorias) {
       $("#tbody-categorias").empty();
       $.each(categorias, function (index, categoria) {
+        let botonDeshabilitar = `<button class="btn btn-dark btn-sm" onclick="DeshabilitarCategoria('${categoria.categoriaID}')">${categoria.eliminado ? 'Habilitar' : 'Deshabilitar'}</button>`;
+        if (categoria.eliminado) {
+          botonDeshabilitar = `<button class="btn btn-dark btn-sm" onclick="HabilitarCategoria('${categoria.categoriaID}')">Habilitar</button>`;
+        }
         $("#tbody-categorias").append(`
-            <tr>
-              <td class="text-light " >${categoria.descripcion}</td>
-              <td class="text-light text-center">
-                <button class="btn btn-dark btn-sm" onClick="BuscarCategoria(${categoria.categoriaID})">Editar</button> |
-                <button class="btn btn-dark btn-sm" onclick="DeshabilitarCategoria(${categoria.categoriaID})">Deshabilitar</button>
-                </td>
-            </tr>
-          `);
+          <tr>
+            <td class="text-light " >${categoria.descripcion}</td>
+            <td class="text-light text-center">
+              <button class="btn btn-dark btn-sm" onClick="BuscarCategoria(${categoria.categoriaID})">Editar</button> |
+              ${botonDeshabilitar}
+            </td>
+          </tr>
+        `);
       });
     },
     error: function (xhr, status) {
@@ -53,7 +57,6 @@ function BuscarCategoria(categoriaID) {
   });
 }
 
-
 function DeshabilitarCategoria(categoriaID) {
   categoriaID = parseInt(categoriaID); // convert string to number
   $.ajax({
@@ -66,9 +69,8 @@ function DeshabilitarCategoria(categoriaID) {
     success: function (resultado) {
       if (resultado) {
         BuscarCategorias();
-        alert("La categorìa ha sido eliminada");
       } else {
-        alert("resultado = false");
+        alert("Error: la categoría no ha sido eliminada");
       }
     },
     error: function (xhr, status) {
@@ -77,6 +79,24 @@ function DeshabilitarCategoria(categoriaID) {
   });
 }
 
+function HabilitarCategoria(categoriaID) {
+  $.ajax({
+    url: '../../Categorias/HabilitarCategoria',
+    data: { categoriaID: categoriaID },
+    type: 'POST',
+    dataType: 'json',
+    success: function (resultado) {
+      if (resultado) {
+        BuscarCategorias();
+      } else {
+        alert('No se pudo habilitar la categoria.');
+      }
+    },    
+    error: function (xhr, status) {
+      alert('Error al habilitar la categoria.');
+    }
+  });
+}
 
 function VaciarFormulario() {
   $("#Descripcion").val('');

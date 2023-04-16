@@ -105,4 +105,25 @@ public class CategoriasController : Controller
         }
         return Json(resultado);
     }
+
+public JsonResult HabilitarCategoria(int categoriaID)
+{
+    bool resultado = true;
+    if (categoriaID != 0)
+    {
+        var categoriaHabilitar = _contexto.Categorias.Find(categoriaID);
+        if (categoriaHabilitar != null)
+        {
+            categoriaHabilitar.Eliminado = false;
+            _contexto.SaveChanges();
+            resultado = true;
+        }
+    }
+    else
+    {
+        resultado = false;
+    }
+    return Json(resultado);
+}
+
 }
