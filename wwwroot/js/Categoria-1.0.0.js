@@ -1,5 +1,10 @@
 window.onload = BuscarCategorias();
 
+function VaciarFormulario() {
+  $("#Descripcion").val('');
+  $("#CategoriaID").val(0);
+}
+
 function BuscarCategorias() {
   $.get('../../Categorias/BuscarCategorias', function(categorias) {
     let tbodyCategorias = $("#tbody-categorias").empty();
@@ -24,6 +29,21 @@ function BuscarCategorias() {
   }).fail(function() {
     alert('Error al cargar categorias');
   });
+}
+
+function BuscarCategoria(categoriaID) {
+  $.get('../../Categorias/BuscarCategorias', { categoriaID: categoriaID })
+    .done(function(categorias) {
+      if (categorias.length == 1) {
+        let categoria = categorias[0];
+        $("#Descripcion").val(categoria.descripcion);
+        $("#CategoriaID").val(categoria.categoriaID);
+        $("#ModalCategoria").modal("show");
+      }
+    })
+    .fail(function() {
+      alert('Error al cargar categorias');
+    });
 }
 
 function BuscarCategoria(categoriaID) {
@@ -57,26 +77,6 @@ function HabilitarCategoria(categoriaID) {
     })
     .fail(function() {
       alert('Error al habilitar la categoria.');
-    });
-}
-
-function VaciarFormulario() {
-  $("#Descripcion").val('');
-  $("#CategoriaID").val(0);
-}
-
-function BuscarCategoria(categoriaID) {
-  $.get('../../Categorias/BuscarCategorias', { categoriaID: categoriaID })
-    .done(function(categorias) {
-      if (categorias.length == 1) {
-        let categoria = categorias[0];
-        $("#Descripcion").val(categoria.descripcion);
-        $("#CategoriaID").val(categoria.categoriaID);
-        $("#ModalCategoria").modal("show");
-      }
-    })
-    .fail(function() {
-      alert('Error al cargar categorias');
     });
 }
 
