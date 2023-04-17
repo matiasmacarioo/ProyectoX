@@ -202,3 +202,8 @@ p{
 .rounded-pill {
 	border-radius: 6px !important;
 }
+
+
+#busqueda::placeholder{
+  color: rgb(230, 230, 230);
+}
