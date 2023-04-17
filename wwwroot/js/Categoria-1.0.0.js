@@ -12,7 +12,7 @@ function GuardarCategoria() {
   $.post('../../Categorias/GuardarCategoria', { categoriaID, descripcion })
     .done(function (resultado) {
       resultado ? ($("#ModalCategoria").modal("hide"), BuscarCategorias())
-        : alert("Existe una Categoría con la misma descripcións.");
+        : alert("La descripción ya existe. Por favor ingrese una descripción única.");
     })
     .fail(function () {
       alert('Disculpe, existió un problema');
