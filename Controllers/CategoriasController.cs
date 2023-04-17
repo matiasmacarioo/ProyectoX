@@ -34,56 +34,59 @@ public class CategoriasController : Controller
         return Json(categorias);
     }
 
-    public JsonResult GuardarCategoria(int categoriaID, string descripcion)
+public JsonResult GuardarCategoria(int categoriaID, string descripcion)
+{
+    int resultado = -1; // valor por defecto para indicar que falló (default)
+
+    if (!string.IsNullOrEmpty(descripcion))
     {
-        bool resultado = false;
-
-        if (!string.IsNullOrEmpty(descripcion))
+        // SI ES 0 CREA UNA NUEVA
+        if (categoriaID == 0)
         {
-
-
-            //SI ES 0 QUIERE DECIR QUE ESTA CREANDO LA CATEGORIA
-            if (categoriaID == 0)
+             //BUSCAMOS SI YA EXISTE UNA CON LA MISMA DESCRIPCION
+            var categoriaOriginal = _contexto.Categorias.Where(c => c.Descripcion == descripcion).FirstOrDefault();
+            if (categoriaOriginal == null)
             {
-                //BUSCAMOS EN LA TABLA SI EXISTE UNA CON LA MISMA DESCRIPCION
-                var categoriaOriginal = _contexto.Categorias.Where(c => c.Descripcion == descripcion).FirstOrDefault();
-                if (categoriaOriginal == null)
+                //DECLARAMOS EL OBJETO CON EL VALOR DE LA DECRIPCION INGRESADA EN EL MODAL
+                var categoriaGuardar = new Categoria
                 {
-                    //DECLAMOS EL OBJETO DANDO EL VALOR
-                    var categoriaGuardar = new Categoria
-                    {
-                        Descripcion = descripcion
-                    };
-                    _contexto.Add(categoriaGuardar);
-                    _contexto.SaveChanges();
-                    resultado = true;
-
-                }
-
-
+                    Descripcion = descripcion
+                };
+                _contexto.Add(categoriaGuardar);
+                _contexto.SaveChanges();
+                resultado = 0; // SE CREA EL OBJETO CORRECTAMENTE (CASO 0)
             }
             else
             {
-                //BUSCAMOS EN LA TABLA SI EXISTE UNA CON LA MISMA DESCRIPCION Y DISTINTO ID DE REGISTRO AL QUE ESTAMOS EDITANDO
-                var categoriaOriginal = _contexto.Categorias.Where(c => c.Descripcion == descripcion && c.CategoriaID != categoriaID).FirstOrDefault();
-                if (categoriaOriginal == null)
-                {
-                    //crear variable que guarde el objeto segun el id deseado
-                    var categoriaEditar = _contexto.Categorias.Find(categoriaID);
-                    if (categoriaEditar != null)
-                    {
-                        categoriaEditar.Descripcion = descripcion;
-                        _contexto.SaveChanges();
-                        resultado = true;
-                    }
-                }
-
-
+                resultado = 1; //La categoría ya existe (CASO 1)
             }
         }
-
-        return Json(resultado);
+        else
+        {
+            var categoriaOriginal = _contexto.Categorias.Where(c => c.Descripcion == descripcion && c.CategoriaID != categoriaID).FirstOrDefault();
+            if (categoriaOriginal == null)
+            {
+                var categoriaEditar = _contexto.Categorias.Find(categoriaID);
+                if (categoriaEditar != null)
+                {
+                    categoriaEditar.Descripcion = descripcion;
+                    _contexto.SaveChanges();
+                    resultado = 0; // SE EDITA EL OBJETO CORRECTAMENTE (CASO 0)
+                }
+            }
+            else
+            {
+                resultado = 1; //La categoría ya existe (CASO 1)
+            }
+        }
     }
+    else
+    {
+        resultado = 2; //La descripción no puede estar vacía (CASO 2)
+    }
+
+    return Json(resultado);
+}
 
     public JsonResult DeshabilitarCategoria(int categoriaID)
     {

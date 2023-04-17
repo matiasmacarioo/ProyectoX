@@ -11,13 +11,27 @@ function GuardarCategoria() {
 
   $.post('../../Categorias/GuardarCategoria', { categoriaID, descripcion })
     .done(function (resultado) {
-      resultado ? ($("#ModalCategoria").modal("hide"), BuscarCategorias())
-        : alert("La descripción ya existe. Por favor ingrese una descripción única.");
+      switch(resultado) {
+        case 0:
+          $("#ModalCategoria").modal("hide");
+          BuscarCategorias();
+          break;
+        case 1:
+          alert("La descripción ya existe. Por favor ingrese una descripción única.");
+          break;
+        case 2:
+          alert("La descripción no puede estar vacía. Por favor ingrese una descripción válida.");
+          break;
+        default:
+          alert("Ocurrió un error inesperado. Por favor inténtelo de nuevo más tarde.");
+          break;
+      }
     })
     .fail(function () {
       alert('Disculpe, existió un problema');
     });
 }
+
 
 // esta función realiza una llamada AJAX para obtener una lista de categorías desde el servidor y mostrarla en la página.
 function BuscarCategorias() {
