@@ -10,21 +10,23 @@ function BuscarCategorias() {
     success: function (categorias) {
       $("#tbody-categorias").empty();
       $.each(categorias, function (index, categoria) {
-        let botonDeshabilitar = `<button class="btn btn-dark btn-sm" onclick="DeshabilitarCategoria('${categoria.categoriaID}')">${categoria.eliminado ? 'Habilitar' : 'Deshabilitar'}</button>`;
+        let botonDeshabilitar = `<button class="btn btn-dark btn-sm deshabilitar" onclick="DeshabilitarCategoria('${categoria.categoriaID}')">${categoria.eliminado ? 'Habilitar' : 'Deshabilitar'}</button>`;
         if (categoria.eliminado) {
-          botonDeshabilitar = `<button class="btn btn-dark btn-sm" onclick="HabilitarCategoria('${categoria.categoriaID}')">Habilitar</button>`;
+          botonDeshabilitar = `<button class="btn btn-dark btn-sm habilitar" onclick="HabilitarCategoria('${categoria.categoriaID}')">Habilitar</button>`;
         }
         $("#tbody-categorias").append(`
           <tr>
             <td class="text-light " >${categoria.descripcion}</td>
-            <td class="text-light text-center">
-              <button class="btn btn-dark btn-sm" onClick="BuscarCategoria(${categoria.categoriaID})">Editar</button> |
+            <td class="text-light text-center btn-group">
+              <button class="btn btn-dark btn-sm editar" onClick="BuscarCategoria(${categoria.categoriaID})">Editar</button>
+              <button class="btn btn-dark btn-sm" disabled></button>
               ${botonDeshabilitar}
             </td>
           </tr>
         `);
       });
     },
+    
     error: function (xhr, status) {
       alert('Error al cargar categorias');
     },
