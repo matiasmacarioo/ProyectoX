@@ -135,12 +135,10 @@ p{
 	border-color: #2f2f2f;
 }
 
-/* .btn-sm:hover{
+.btn-sm:hover{
   transform: scale(1.1);
-  margin-right: 2px;
-  margin-left: 2px;
   transition: 0.15s ease-in-out;
-} */
+}
 
 .btn-group .btn.editar {
   border-right: none;
