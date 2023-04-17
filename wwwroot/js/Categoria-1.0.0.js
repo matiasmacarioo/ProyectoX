@@ -35,12 +35,12 @@ function GuardarCategoria() {
 
 // esta función realiza una llamada AJAX para obtener una lista de categorías desde el servidor y mostrarla en la página.
 function BuscarCategorias() {
-  console.log('Inside BuscarCategorias function');
+  // console.log('Inside BuscarCategorias function');
   $.get('../../Categorias/BuscarCategorias', function (categorias) {
-    console.log('Got categorias data:', categorias);
+    // console.log('categorias:', categorias);
     let tbodyCategorias = $("#tbody-categorias").empty();
     $.each(categorias, function (index, categoria) {
-      console.log('Processing categoria:', categoria);
+      // console.log('Procesando categoria:', categoria);
       let botonDeshabilitar = '';
       if (categoria.eliminado) {
         botonDeshabilitar = `<button class="btn btn-dark btn-sm habilitar" onclick="HabilitarCategoria('${categoria.categoriaID}')">Habilitar</button>`;
