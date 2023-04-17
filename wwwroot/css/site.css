@@ -180,3 +180,25 @@ p{
 .display-4{
   font-weight: 600;
 }
+
+.input-group-addon {
+  padding: 0 10px;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-group-addon i {
+  color: #aaa;
+}
+
+.rounded-pill {
+	border-radius: 6px !important;
+}
