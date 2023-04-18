@@ -212,6 +212,8 @@ p{
   color: rgb(230, 230, 230);
 }
 
-.habilitar {
-  margin-left: -10px;
+.input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+	margin-left: 3px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
 }
