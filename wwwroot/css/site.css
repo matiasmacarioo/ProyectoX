@@ -24,6 +24,10 @@ body{
   background-size: cover;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* .card-bg {
     background-image  : url(https://fastly.picsum.photos/id/413/1920/1080.jpg?hmac=DTdv_AxnEpp5KQFgpzmi1Ayxj6VLuwonto7bsjVDx9U);
     background-size: cover  ;
@@ -206,4 +210,8 @@ p{
 
 #busqueda::placeholder{
   color: rgb(230, 230, 230);
+}
+
+.habilitar {
+  margin-left: -10px;
 }
