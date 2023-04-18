@@ -71,8 +71,6 @@ $('#busqueda').on('keyup', function () {
     }
   });
 });
-
-
   }).fail(function () {
     alert('Error al cargar categorias');
   });
@@ -99,7 +97,7 @@ function BuscarCategoria(categoriaID) {
 function DeshabilitarCategoria(categoriaID) {
   $.post('../../Categorias/DeshabilitarCategoria', { categoriaID: parseInt(categoriaID) })
     .done(function (resultado) {
-      resultado ? BuscarCategorias() : alert("Error: la categoría no ha sido eliminada");
+      resultado ? BuscarCategorias() : alert("No se pudo deshabilitar la categoria.");
     })
     .fail(function (xhr, status) {
       alert('Disculpe, existió un problema');
