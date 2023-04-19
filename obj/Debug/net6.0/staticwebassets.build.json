@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9zuwrc6Dn6S39xCbYoKoqjc1APUstHvCBrYdhbivX6k=",
+  "Hash": "zfi7FZGXJDoMWMpaHg1FuinvwKy5HxVesRPuLXvkDCE=",
   "Source": "ProyectoX",
   "BasePath": "_content/ProyectoX",
   "Mode": "Default",
@@ -1103,6 +1103,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\Matias\\ProyectoX\\wwwroot\\favicon.ico",
+      "SourceId": "ProyectoX",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Matias\\ProyectoX\\wwwroot\\",
+      "BasePath": "_content/ProyectoX",
+      "RelativePath": "favicon.ico",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
       "Identity": "C:\\Users\\Matias\\ProyectoX\\wwwroot\\js\\Categoria-1.0.0.js",
