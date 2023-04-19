@@ -52,7 +52,7 @@ function BuscarCategorias() {
             <td class="text-light">${categoria.descripcion}</td>
             <td class="text-light text-center btn-group">
               <button class="btn btn-dark btn-sm editar" onClick="BuscarCategoria(${categoria.categoriaID})">Editar</button>
-              <button class="btn btn-dark btn-sm" disabled></button>
+              <button class="btn btn-dark btn-sm" onClick="EliminarCategoria(${categoria.categoriaID})">X</button>
               ${botonDeshabilitar}
             </td>
           </tr>
@@ -114,6 +114,28 @@ function HabilitarCategoria(categoriaID) {
       alert('Error al habilitar la categoria.');
     });
 }
+
+function EliminarCategoria(categoriaID) {
+  // Show confirmation modal
+  $('#confirm-delete-modal').modal('show');
+  
+  // Add event listener to delete button in modal
+  $('#confirm-delete-btn').click(function() {
+    // Send post request to server to delete the category
+    $.post('../../Categorias/EliminarCategoria', { categoriaID: parseInt(categoriaID) })
+      .done(function (resultado) {
+        resultado ? BuscarCategorias() : alert("No se pudo eliminar la categoria.");
+      })
+      .fail(function (xhr, status) {
+        alert('Disculpe, existió un problema');
+      });
+      
+    // Hide the modal
+    $('#confirm-delete-modal').modal('hide');
+  });
+}
+
+
 
 // esta función limpia los campos del modal.
 function VaciarFormulario() {

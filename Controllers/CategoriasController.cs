@@ -34,59 +34,59 @@ public class CategoriasController : Controller
         return Json(categorias);
     }
 
-public JsonResult GuardarCategoria(int categoriaID, string descripcion)
-{
-    int resultado = -1; // valor por defecto para indicar que falló (default)
-
-    if (!string.IsNullOrEmpty(descripcion))
+    public JsonResult GuardarCategoria(int categoriaID, string descripcion)
     {
-        // SI ES 0 CREA UNA NUEVA
-        if (categoriaID == 0)
+        int resultado = -1; // valor por defecto para indicar que falló (default)
+
+        if (!string.IsNullOrEmpty(descripcion))
         {
-             //BUSCAMOS SI YA EXISTE UNA CON LA MISMA DESCRIPCION
-            var categoriaOriginal = _contexto.Categorias.Where(c => c.Descripcion == descripcion).FirstOrDefault();
-            if (categoriaOriginal == null)
+            // SI ES 0 CREA UNA NUEVA
+            if (categoriaID == 0)
             {
-                //DECLARAMOS EL OBJETO CON EL VALOR DE LA DECRIPCION INGRESADA EN EL MODAL
-                var categoriaGuardar = new Categoria
+                //BUSCAMOS SI YA EXISTE UNA CON LA MISMA DESCRIPCION
+                var categoriaOriginal = _contexto.Categorias.Where(c => c.Descripcion == descripcion).FirstOrDefault();
+                if (categoriaOriginal == null)
                 {
-                    Descripcion = descripcion
-                };
-                _contexto.Add(categoriaGuardar);
-                _contexto.SaveChanges();
-                resultado = 0; // SE CREA EL OBJETO CORRECTAMENTE (CASO 0)
-            }
-            else
-            {
-                resultado = 1; //La categoría ya existe (CASO 1)
-            }
-        }
-        else
-        {
-            var categoriaOriginal = _contexto.Categorias.Where(c => c.Descripcion == descripcion && c.CategoriaID != categoriaID).FirstOrDefault();
-            if (categoriaOriginal == null)
-            {
-                var categoriaEditar = _contexto.Categorias.Find(categoriaID);
-                if (categoriaEditar != null)
-                {
-                    categoriaEditar.Descripcion = descripcion;
+                    //DECLARAMOS EL OBJETO CON EL VALOR DE LA DECRIPCION INGRESADA EN EL MODAL
+                    var categoriaGuardar = new Categoria
+                    {
+                        Descripcion = descripcion
+                    };
+                    _contexto.Add(categoriaGuardar);
                     _contexto.SaveChanges();
-                    resultado = 0; // SE EDITA EL OBJETO CORRECTAMENTE (CASO 0)
+                    resultado = 0; // SE CREA EL OBJETO CORRECTAMENTE (CASO 0)
+                }
+                else
+                {
+                    resultado = 1; //La categoría ya existe (CASO 1)
                 }
             }
             else
             {
-                resultado = 1; //La categoría ya existe (CASO 1)
+                var categoriaOriginal = _contexto.Categorias.Where(c => c.Descripcion == descripcion && c.CategoriaID != categoriaID).FirstOrDefault();
+                if (categoriaOriginal == null)
+                {
+                    var categoriaEditar = _contexto.Categorias.Find(categoriaID);
+                    if (categoriaEditar != null)
+                    {
+                        categoriaEditar.Descripcion = descripcion;
+                        _contexto.SaveChanges();
+                        resultado = 0; // SE EDITA EL OBJETO CORRECTAMENTE (CASO 0)
+                    }
+                }
+                else
+                {
+                    resultado = 1; //La categoría ya existe (CASO 1)
+                }
             }
         }
-    }
-    else
-    {
-        resultado = 2; //La descripción no puede estar vacía (CASO 2)
-    }
+        else
+        {
+            resultado = 2; //La descripción no puede estar vacía (CASO 2)
+        }
 
-    return Json(resultado);
-}
+        return Json(resultado);
+    }
 
     public JsonResult DeshabilitarCategoria(int categoriaID)
     {
@@ -109,24 +109,43 @@ public JsonResult GuardarCategoria(int categoriaID, string descripcion)
         return Json(resultado);
     }
 
-public JsonResult HabilitarCategoria(int categoriaID)
-{
-    bool resultado = true;
-    if (categoriaID != 0)
+    public JsonResult HabilitarCategoria(int categoriaID)
     {
-        var categoriaHabilitar = _contexto.Categorias.Find(categoriaID);
-        if (categoriaHabilitar != null)
+        bool resultado = true;
+        if (categoriaID != 0)
         {
-            categoriaHabilitar.Eliminado = false;
-            _contexto.SaveChanges();
-            resultado = true;
+            var categoriaHabilitar = _contexto.Categorias.Find(categoriaID);
+            if (categoriaHabilitar != null)
+            {
+                categoriaHabilitar.Eliminado = false;
+                _contexto.SaveChanges();
+                resultado = true;
+            }
         }
+        else
+        {
+            resultado = false;
+        }
+        return Json(resultado);
     }
-    else
-    {
-        resultado = false;
-    }
-    return Json(resultado);
-}
 
+    public JsonResult EliminarCategoria(int categoriaID)
+    {
+        bool resultado = true;
+        if (categoriaID != 0)
+        {
+            var categoriaDeshabilitar = _contexto.Categorias.Find(categoriaID);
+            if (categoriaDeshabilitar != null)
+            {
+                _contexto.Categorias.Remove(categoriaDeshabilitar);
+                _contexto.SaveChanges();
+                resultado = true;
+            }
+        }
+        else
+        {
+            resultado = false;
+        }
+        return Json(resultado);
+    }   
 }

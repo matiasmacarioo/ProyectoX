@@ -16,7 +16,7 @@
                 <input type="hidden" id="CategoriaID" value="0" />
                 <div>
                     <label class="control-label text-light">Nombre</label>
-                    <input type="text" class="form-control" id="Descripcion" autocomplete="off"  />
+                    <input type="text" class="form-control" id="Descripcion" autocomplete="off" />
                 </div>
             </div>
             <div class="modal-footer">
@@ -26,6 +26,26 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="confirm-delete-modal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-light">
+                <p>¿Estás seguro que deseas eliminar esta categoría?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirm-delete-btn">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 <div>

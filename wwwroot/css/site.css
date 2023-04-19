@@ -217,3 +217,7 @@ p{
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
 }
+
+.btn-group > .btn-group:not(:first-child), .btn-group > .btn:not(:first-child) {
+	margin-left: 0px;
+}
