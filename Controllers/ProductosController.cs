@@ -26,22 +26,16 @@ public class ProductosController : Controller
 
 public JsonResult BuscarProductos(int categoriaID = 0)
 {
-    var productos = _contexto.Productos.Include(p => p.Categoria).ToList();
+    var productos = _contexto.Productos.ToList();
 
     if (categoriaID > 0)
     {
         productos = productos.Where(p => p.CategoriaID == categoriaID).ToList();
     }
 
-    var productosViewModel = productos.Select(p => new {
-        id = p.ProductoID,
-        nombre = p.Descripcion,
-        categoria = p.Categoria != null ? p.Categoria.Descripcion : "",
-        acciones = ""
-    }).ToList();
-
-    return Json(productosViewModel);
+    return Json(productos);
 }
+
 
 
 
@@ -51,13 +45,13 @@ public JsonResult BuscarCategorias()
     return Json(categorias);
 }
 
-public JsonResult GuardarProducto(int productoID, string descripcion, int categoriaID)
+public JsonResult GuardarProducto(int id, string descripcion, int categoriaID)
 {
     int resultado = -1;
 
     if (!string.IsNullOrEmpty(descripcion))
     {
-        if (productoID == 0)
+        if (id == 0)
         {
             var productoOriginal = _contexto.Productos.Where(p => p.Descripcion == descripcion && p.CategoriaID == categoriaID).FirstOrDefault();
             if (productoOriginal == null)
@@ -81,7 +75,7 @@ public JsonResult GuardarProducto(int productoID, string descripcion, int catego
             var productoOriginal = _contexto.Productos.Where(p => p.Descripcion == descripcion && p.CategoriaID == categoriaID).FirstOrDefault();
             if (productoOriginal == null)
             {
-                var productoEditar = _contexto.Productos.Find(productoID);
+                var productoEditar = _contexto.Productos.Find(id);
                 if (productoEditar != null)
                 {
                     productoEditar.Descripcion = descripcion;

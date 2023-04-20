@@ -42,13 +42,13 @@ function BuscarProductos() {
       let tbodyProductos = $('#tbody-productos').empty();
       $.each(data, function(index, producto) {
         let acciones = `
-          <button class="btn btn-dark btn-sm editar" onClick="BuscarProducto(${producto.productoID})">Editar</button>
+          <button class="btn btn-dark btn-sm editar" onClick="GuardarProducto(${producto.productoID})">Editar</button>
           <button class="btn btn-dark btn-sm" onClick="EliminarProducto(${producto.productoID})">X</button>
         `;
         tbodyProductos.append(`
           <tr>
-            <td class="text-light">${producto.nombre}</td>
-            <td class="text-light">${producto.categoria }</td>
+            <td class="text-light">${producto.descripcion}</td>
+            <td class="text-light">${producto.categoriaID}</td>
             <td class="text-light text-center btn-group">${acciones}</td>
           </tr>
         `);
@@ -71,6 +71,7 @@ function BuscarProductos() {
     }
   });
 }
+
 
 
 
