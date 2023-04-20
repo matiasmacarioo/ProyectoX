@@ -16,7 +16,7 @@
                 <input type="hidden" id="CategoriaID" value="0" />
                 <div>
                     <label class="control-label text-light">Nombre</label>
-                    <input type="text" class="form-control" id="Descripcion" autocomplete="off" />
+                    <input type="text" class="form-control" id="Descripcion" autocomplete="off" oninput="this.value = this.value.toUpperCase()" style="text-transform: uppercase;"/>
                 </div>
             </div>
             <div class="modal-footer">
