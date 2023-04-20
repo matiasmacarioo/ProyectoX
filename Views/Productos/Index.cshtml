@@ -1,0 +1,86 @@
+@{
+    ViewData["Title"] = "Productos";
+}
+
+<!-- Modal -->
+<div class="modal fade" id="ModalProducto" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Producto</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="ProductoID" value="0" />
+                <div>
+                    <label class="control-label text-light">Categoría</label>
+                    <select id="CategoriaID" class="form-control">
+                    </select>
+                </div>
+                <div>
+                    <label class="control-label text-light">Nombre</label>
+                    <input type="text" class="form-control" id="Descripcion" autocomplete="off" oninput="this.value = this.value.toUpperCase()" style="text-transform: uppercase;"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="GuardarProducto()" class="btn btn-dark text-light">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirm-delete-modal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-light">
+                <p>¿Estás seguro que deseas eliminar este producto?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirm-delete-btn">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <h1 class="display-4">Productos</h1>
+
+    <!-- Search bar -->
+
+    <!-- Button trigger modal -->
+<div class="mb-2">
+  <button type="button" onclick="LlenarCategorias(); VaciarFormulario();" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalProducto">
+    Nuevo
+  </button>
+</div>
+
+
+<table class="table table-bordered table-striped table-condensed glass-bg table-responsive table-rounded table-hover">
+  <thead>
+    <div class="form-group">
+      <div class="input-group">
+        <input type="text" class="form-control rounded-pill glass-bg" id="busqueda" placeholder="Buscar...">
+        <span class="input-group-addon">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+    </div>
+    <tr>
+      <th class="text-white col-sm-7">Descripción</th>
+      <th class="text-white col-sm-4">Categoria</th>
+      <th class="text-light text-center col-sm-2">Acciones</th>
+    </tr>
+  </thead>
+  <tbody id="tbody-productos">
+  </tbody>
+</table>
+
+@section Scripts{
+    <script src="~/js/productos-1.0.0.js"></script>
+}

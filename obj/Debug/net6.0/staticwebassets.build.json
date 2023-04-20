@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zfi7FZGXJDoMWMpaHg1FuinvwKy5HxVesRPuLXvkDCE=",
+  "Hash": "1MG/xiJltbpEBqBphBPCSBoBVXDiPIOhONCtsIx/aqI=",
   "Source": "ProyectoX",
   "BasePath": "_content/ProyectoX",
   "Mode": "Default",
@@ -1137,6 +1137,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\Categoria-1.0.0.js"
+    },
+    {
+      "Identity": "C:\\Users\\Matias\\ProyectoX\\wwwroot\\js\\productos-1.0.0.js",
+      "SourceId": "ProyectoX",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Matias\\ProyectoX\\wwwroot\\",
+      "BasePath": "_content/ProyectoX",
+      "RelativePath": "js/productos-1.0.0.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\productos-1.0.0.js"
     },
     {
       "Identity": "C:\\Users\\Matias\\ProyectoX\\wwwroot\\js\\site.js",

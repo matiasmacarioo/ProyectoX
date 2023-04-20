@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoX.Data;
 
@@ -11,9 +12,10 @@ using ProyectoX.Data;
 namespace ProyectoX.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230420174321_Productos2Mig")]
+    partial class Productos2Mig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,7 +242,7 @@ namespace ProyectoX.Migrations
 
                     b.HasKey("CategoriaID");
 
-                    b.ToTable("Categorias");
+                    b.ToTable("Categoria");
                 });
 
             modelBuilder.Entity("ProyectoX.Models.Producto", b =>
@@ -265,7 +267,7 @@ namespace ProyectoX.Migrations
 
                     b.HasIndex("CategoriaID");
 
-                    b.ToTable("Productos");
+                    b.ToTable("Producto");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

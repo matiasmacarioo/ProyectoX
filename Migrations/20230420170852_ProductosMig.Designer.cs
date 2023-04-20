@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoX.Data;
 
@@ -11,9 +12,10 @@ using ProyectoX.Data;
 namespace ProyectoX.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230420170852_ProductosMig")]
+    partial class ProductosMig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,32 +242,7 @@ namespace ProyectoX.Migrations
 
                     b.HasKey("CategoriaID");
 
-                    b.ToTable("Categorias");
-                });
-
-            modelBuilder.Entity("ProyectoX.Models.Producto", b =>
-                {
-                    b.Property<int>("ProductoID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductoID"), 1L, 1);
-
-                    b.Property<int>("CategoriaID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Eliminado")
-                        .HasColumnType("bit");
-
-                    b.HasKey("ProductoID");
-
-                    b.HasIndex("CategoriaID");
-
-                    b.ToTable("Productos");
+                    b.ToTable("Categoria");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -317,22 +294,6 @@ namespace ProyectoX.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ProyectoX.Models.Producto", b =>
-                {
-                    b.HasOne("ProyectoX.Models.Categoria", "Categoria")
-                        .WithMany("Productos")
-                        .HasForeignKey("CategoriaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Categoria");
-                });
-
-            modelBuilder.Entity("ProyectoX.Models.Categoria", b =>
-                {
-                    b.Navigation("Productos");
                 });
 #pragma warning restore 612, 618
         }
