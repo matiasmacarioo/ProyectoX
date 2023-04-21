@@ -22,6 +22,8 @@ public class Producto
 
 public class VistaProducto {
     public int ProductoID { get; set; }
+    public bool Eliminado { get; set; }
+
 
     public string? Descripcion { get; set; } 
 

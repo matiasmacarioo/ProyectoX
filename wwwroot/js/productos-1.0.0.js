@@ -1,5 +1,49 @@
 window.onload = BuscarProductos();
 
+function BuscarProductos() {
+  $.ajax({
+    url: '/Productos/BuscarProductos',
+    method: 'GET',
+    success: function(data) {
+      console.log(data); // Log the retrieved products to the console
+      let tbodyProductos = $('#tbody-productos').empty();
+      $.each(data, function(index, producto) {
+        let acciones = `
+          <button class="btn btn-dark btn-sm editar" onClick="EditarProducto(${producto.productoID})">Editar</button>
+          <button class="btn btn-dark btn-sm" onClick="EliminarProducto(${producto.productoID})">X</button>
+        `;
+        let botonDeshabilitar = '';
+        if (producto.eliminado) {
+          botonDeshabilitar = `<button class="btn btn-dark btn-sm habilitar" onclick="HabilitarProducto('${producto.productoID}')">Habilitar</button>`;
+        } else {
+          botonDeshabilitar = `<button class="btn btn-dark btn-sm deshabilitar" onclick="DeshabilitarProducto('${producto.productoID}')">Deshabilitar</button>`;
+        }
+        tbodyProductos.append(`
+          <tr>
+            <td class="text-light">${producto.descripcion}</td>
+            <td class="text-light">${producto.categoriaDescripcion}</td>
+            <td class="text-light text-center btn-group">${acciones} ${botonDeshabilitar}</td>
+          </tr>
+        `);
+      });
+      // función de busqueda
+      $('#busqueda').on('keyup', function() {
+        var value = $(this).val().toLowerCase();
+        $('#tbody-productos tr').each(function() {
+          var rowText = $(this).find('td:first-child').text().toLowerCase();
+          if (rowText.indexOf(value) !== -1) {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+      });
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log('Error al cargar productos:', textStatus, errorThrown); // Log any errors to the console
+    }
+  });
+}
 
 
 function GuardarProducto() {
@@ -50,47 +94,6 @@ function EditarProducto(productoID) {
     });
 }
 
-
-function BuscarProductos() {
-  $.ajax({
-    url: '/Productos/BuscarProductos',
-    method: 'GET',
-    success: function(data) {
-      console.log(data); // Log the retrieved products to the console
-      let tbodyProductos = $('#tbody-productos').empty();
-      $.each(data, function(index, producto) {
-        let acciones = `
-          <button class="btn btn-dark btn-sm editar" onClick="EditarProducto(${producto.productoID})">Editar</button>
-          <button class="btn btn-dark btn-sm" onClick="EliminarProducto(${producto.productoID})">X</button>
-        `;
-        tbodyProductos.append(`
-          <tr>
-            <td class="text-light">${producto.descripcion}</td>
-            <td class="text-light">${producto.categoriaDescripcion}</td>
-            <td class="text-light text-center btn-group">${acciones}</td>
-          </tr>
-        `);
-      });
-      // función de busqueda
-      $('#busqueda').on('keyup', function() {
-        var value = $(this).val().toLowerCase();
-        $('#tbody-productos tr').each(function() {
-          var rowText = $(this).find('td:first-child').text().toLowerCase();
-          if (rowText.indexOf(value) !== -1) {
-            $(this).show();
-          } else {
-            $(this).hide();
-          }
-        });
-      });
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      console.log('Error al cargar productos:', textStatus, errorThrown); // Log any errors to the console
-    }
-  });
-}
-
-
 function LlenarCategorias() {
   $.get('../../Productos/BuscarCategorias', function (categorias) {
     let selectCategorias = $("#CategoriaID").empty();
@@ -103,9 +106,48 @@ function LlenarCategorias() {
   });
 }
 
-
 function VaciarFormulario() {
   $("#Descripcion").val('');
   $("#CategoriaID").val(0);
   $("#ProductoID").val(0);
+}
+
+function DeshabilitarProducto(productoID) {
+  $.post('../../Productos/DeshabilitarProducto', { productoID: parseInt(productoID) })
+    .done(function (resultado) {
+      resultado ? BuscarProductos() : alert("No se pudo deshabilitar el producto.");
+    })
+    .fail(function (xhr, status) {
+      alert('Disculpe, existió un problema');
+    });
+}
+
+function HabilitarProducto(productoID) {
+  $.post('../../Productos/HabilitarProducto', { productoID: productoID })
+    .done(function (resultado) {
+      resultado ? BuscarProductos() : alert('No se pudo habilitar el producto.');
+    })
+    .fail(function () {
+      alert('Error al habilitar la producto.');
+    });
+}
+
+function EliminarProducto(productoID) {
+  // Show confirmation modal
+  $('#confirm-delete-modal').modal('show');
+  
+  // Add event listener to delete button in modal
+  $('#confirm-delete-btn').click(function() {
+    // Send post request to server to delete the category
+    $.post('../../Productos/EliminarProducto', { productoID: parseInt(productoID) })
+      .done(function (resultado) {
+        resultado ? BuscarProductos() : alert("No se pudo eliminar el producto.");
+      })
+      .fail(function (xhr, status) {
+        alert('Disculpe, existió un problema');
+      });
+      
+    // Hide the modal
+    $('#confirm-delete-modal').modal('hide');
+  });
 }

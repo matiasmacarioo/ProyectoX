@@ -43,7 +43,8 @@ public class ProductosController : Controller
                 Descripcion = Producto.Descripcion,
                 ProductoID = Producto.ProductoID,
                 CategoriaID = Producto.CategoriaID,
-                CategoriaDescripcion = Producto.Categoria.Descripcion
+                CategoriaDescripcion = Producto.Categoria.Descripcion,
+                Eliminado = Producto.Eliminado
 
             };
             ProductosMostrar.Add(ProductoMostrar);
@@ -111,4 +112,64 @@ public class ProductosController : Controller
         return Json(resultado);
     }
 
+    public JsonResult DeshabilitarProducto(int productoID)
+    {
+        bool resultado = true;
+        if (productoID != 0)
+        {
+            //crear variable que guarde el objeto segun el id deseado
+            var productoDeshabilitar = _contexto.Productos.Find(productoID);
+            if (productoDeshabilitar != null)
+            {
+                productoDeshabilitar.Eliminado = true;
+                _contexto.SaveChanges();
+                resultado = true;
+            }
+        }
+        else
+        {
+            resultado = false;
+        }
+        return Json(resultado);
+    }
+
+    public JsonResult HabilitarProducto(int productoID)
+    {
+        bool resultado = true;
+        if (productoID != 0)
+        {
+            var productoHabilitar = _contexto.Productos.Find(productoID);
+            if (productoHabilitar != null)
+            {
+                productoHabilitar.Eliminado = false;
+                _contexto.SaveChanges();
+                resultado = true;
+            }
+        }
+        else
+        {
+            resultado = false;
+        }
+        return Json(resultado);
+    }
+
+    public JsonResult EliminarProducto(int productoID)
+    {
+        bool resultado = true;
+        if (productoID != 0)
+        {
+            var productoDeshabilitar = _contexto.Productos.Find(productoID);
+            if (productoDeshabilitar != null)
+            {
+                _contexto.Productos.Remove(productoDeshabilitar);
+                _contexto.SaveChanges();
+                resultado = true;
+            }
+        }
+        else
+        {
+            resultado = false;
+        }
+        return Json(resultado);
+    }
 }
