@@ -20,6 +20,17 @@ public class Producto
     public virtual Categoria Categoria { get; set; }
 }
 
+public class VistaProducto {
+    public int ProductoID { get; set; }
+
+    public string? Descripcion { get; set; } 
+
+    public int CategoriaID { get; set; }
+
+    public string? CategoriaDescripcion { get; set; }
+}
+    
+
 public class ValidCategoriaIDAttribute : ValidationAttribute
 {
     protected override ValidationResult IsValid(object value, ValidationContext validationContext)

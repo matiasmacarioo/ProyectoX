@@ -48,7 +48,7 @@ function BuscarProductos() {
         tbodyProductos.append(`
           <tr>
             <td class="text-light">${producto.descripcion}</td>
-            <td class="text-light">${producto.categoriaID}</td>
+            <td class="text-light">${producto.categoriaDescripcion}</td>
             <td class="text-light text-center btn-group">${acciones}</td>
           </tr>
         `);

@@ -2,6 +2,7 @@
     
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProyectoX.Data;
 using ProyectoX.Models;
@@ -21,20 +22,47 @@ public class ProductosController : Controller
 
     public IActionResult Index()
     {
+        var categorias = _contexto. Categorias.ToList();
+        ViewBag. categorialD = new SelectList(categorias, "CategorialD", "Descripcion");
         return View();
     }
 
-public JsonResult BuscarProductos(int categoriaID = 0)
-{
-    var productos = _contexto.Productos.ToList();
+// public JsonResult BuscarProductos(int categoriaID = 0)
+// {
+//     var productos = _contexto.Productos.ToList();
 
-    if (categoriaID > 0)
+//     if (categoriaID > 0)
+//     {
+//         productos = productos.Where(p => p.CategoriaID == categoriaID).ToList();
+//     }
+
+//     return Json(productos);
+// }
+
+public JsonResult BuscarProductos(int ProductoID = 0)
     {
-        productos = productos.Where(p => p.CategoriaID == categoriaID).ToList();
-    }
+        List<VistaProducto> ProductosMostrar = new List<VistaProducto>();
+        
+        var Productos = _contexto.Productos.Include(s => s.Categoria).ToList();
 
-    return Json(productos);
-}
+        if (ProductoID > 0)
+        {
+           Productos = Productos.Where(p => p.ProductoID == ProductoID).OrderBy(p => p.Descripcion).ToList();
+        }
+        foreach (var Producto in Productos)
+        {
+            var ProductoMostrar = new VistaProducto {
+                Descripcion = Producto.Descripcion,
+                ProductoID = Producto.ProductoID,
+                CategoriaID = Producto.CategoriaID,
+                CategoriaDescripcion = Producto.Categoria.Descripcion
+
+            };
+            ProductosMostrar.Add(ProductoMostrar);
+        }
+
+        return Json(ProductosMostrar);
+    }
 
 
 
