@@ -132,21 +132,30 @@ public class CategoriasController : Controller
     public JsonResult EliminarCategoria(int categoriaID)
     {
         bool resultado = true;
-        var categoriaDesactivar = _contexto.Categorias.Find(categoriaID);
+        var categoriaEliminar = _contexto.Categorias.Find(categoriaID);
 
         if (categoriaID != 0)
         {
             var categoriaProductos = (from a in _contexto.Productos where a.CategoriaID == categoriaID select a).ToList();
             if (categoriaProductos.Count == 0)
             {
-                _contexto.Categorias.Remove(categoriaDesactivar);
-                _contexto.SaveChanges();
-                resultado = true;
+                if (categoriaEliminar != null)
+                {
+                    _contexto.Categorias.Remove(categoriaEliminar);
+                    _contexto.SaveChanges();
+                    resultado = true;
+                }
+                else
+                {
+                    resultado = false;
+                    return Json(new { success = false, message = "La categoría no se encontró en la base de datos." });
+                }
+
             }
             else
             {
                 resultado = false;
-                return Json(new { success = false, message = "La categoría no se puede desactivar porque tiene productos asociados." });
+                return Json(new { success = false, message = "La categoría no se puede eliminar porque tiene productos asociados." });
             }
         }
         else

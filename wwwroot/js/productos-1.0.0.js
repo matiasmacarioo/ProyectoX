@@ -9,7 +9,7 @@ function BuscarProductos() {
       let tbodyProductos = $('#tbody-productos').empty();
       $.each(data, function(index, producto) {
         let acciones = `
-          <button class="btn btn-dark btn-sm editar" onClick="EditarProducto(${producto.productoID})">Editar</button>
+          <button class="btn btn-dark btn-sm editar" onClick="EditarProducto(${producto.productoID}, 'editar')">Editar</button>
           <button class="btn btn-dark btn-sm" onClick="EliminarProducto(${producto.productoID})">X</button>
         `;
         let botonDeshabilitar = '';
@@ -78,6 +78,10 @@ function GuardarProducto() {
 }
 
 function EditarProducto(productoID) {
+  var modal = $('#ModalProducto');
+  var title = $('#exampleModalLabel');
+  var modo = productoID ? 'editar' : 'crear'; // Define the modo variable
+
   $.get('../../Productos/BuscarProductos', { productoID: productoID })
     .done(function (productos) {
       if (productos.length == 1) {
@@ -86,7 +90,17 @@ function EditarProducto(productoID) {
         $("#ProductoID").val(producto.productoID);
         $("#CategoriaID").val(producto.categoriaID);
         LlenarCategorias(); // call the function to fill the categories dropdown
-        $("#ModalProducto").modal("show");
+        
+        // Change modal title based on mode
+        if (modo === 'editar') {
+          title.text('Editar Producto');
+        } else {
+          title.text('Agregar Producto');
+        }
+
+        // Show modal
+        modal.modal('show');
+
       }
     })
     .fail(function () {
@@ -107,6 +121,10 @@ function LlenarCategorias() {
 }
 
 function VaciarFormulario() {
+  var modal = $('#ModalCategoria');
+  var title = $('#exampleModalLabel');
+  title.text('Agregar Categoría');
+
   $("#Descripcion").val('');
   $("#CategoriaID").val(0);
   $("#ProductoID").val(0);

@@ -51,7 +51,7 @@ function BuscarCategorias() {
           <tr>
             <td class="text-light">${categoria.descripcion}</td>
             <td class="text-light text-center btn-group">
-              <button class="btn btn-dark btn-sm editar" onClick="BuscarCategoria(${categoria.categoriaID})">Editar</button>
+              <button class="btn btn-dark btn-sm editar" onClick="BuscarCategoria(${categoria.categoriaID}, 'editar')">Editar</button>
               <button class="btn btn-dark btn-sm" onClick="EliminarCategoria(${categoria.categoriaID})">X</button>
               ${botonDeshabilitar}
             </td>
@@ -79,19 +79,34 @@ function BuscarCategorias() {
 
 // esta función recibe un ID de categoría como argumento y realiza una llamada AJAX para obtener la información de esa categoría desde el servidor y mostrarla en un formulario en la página.
 function BuscarCategoria(categoriaID) {
+  var modal = $('#ModalCategoria');
+  var title = $('#exampleModalLabel');
+  var modo = categoriaID ? 'editar' : 'crear'; // Define the modo variable
+
   $.get('../../Categorias/BuscarCategorias', { categoriaID: categoriaID })
     .done(function (categorias) {
       if (categorias.length == 1) {
         let categoria = categorias[0];
         $("#Descripcion").val(categoria.descripcion);
         $("#CategoriaID").val(categoria.categoriaID);
-        $("#ModalCategoria").modal("show");
+        
+        // Change modal title based on mode
+        if (modo === 'editar') {
+          title.text('Editar Categoría');
+        } else {
+          title.text('Agregar Categoría');
+        }
+
+        // Show modal
+        modal.modal('show');
       }
     })
     .fail(function () {
       alert('Error al cargar categorias');
     });
 }
+
+
 
 // esta función recibe un ID de categoría como argumento y realiza una llamada AJAX para deshabilitar esa categoría en la base de datos.
 function DeshabilitarCategoria(categoriaID) {
@@ -144,11 +159,14 @@ function EliminarCategoria(categoriaID) {
   });
 }
 
-
-
-
 // esta función limpia los campos del modal.
 function VaciarFormulario() {
+  var modal = $('#ModalCategoria');
+  var title = $('#exampleModalLabel');
+  title.text('Agregar Categoría');
+  
+  // Clear form fields
   $("#Descripcion").val('');
   $("#CategoriaID").val(0);
+
 }
