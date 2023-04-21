@@ -147,5 +147,5 @@ public class CategoriasController : Controller
             resultado = false;
         }
         return Json(resultado);
-    }   
+    }
 }
