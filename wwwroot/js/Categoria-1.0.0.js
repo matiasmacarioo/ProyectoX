@@ -11,7 +11,7 @@ function GuardarCategoria() {
 
   $.post('../../Categorias/GuardarCategoria', { categoriaID, descripcion })
     .done(function (resultado) {
-      switch(resultado) {
+      switch (resultado) {
         case 0:
           $("#ModalCategoria").modal("hide");
           BuscarCategorias();
@@ -59,18 +59,18 @@ function BuscarCategorias() {
         `);
     });
 
-// función de busqueda
-$('#busqueda').on('keyup', function () {
-  var value = $(this).val().toLowerCase();
-  $('#tbody-categorias tr').each(function() {
-    var rowText = $(this).find('td:first-child').text().toLowerCase();
-    if (rowText.indexOf(value) !== -1) {
-      $(this).show();
-    } else {
-      $(this).hide();
-    }
-  });
-});
+    // función de busqueda
+    $('#busqueda').on('keyup', function () {
+      var value = $(this).val().toLowerCase();
+      $('#tbody-categorias tr').each(function () {
+        var rowText = $(this).find('td:first-child').text().toLowerCase();
+        if (rowText.indexOf(value) !== -1) {
+          $(this).show();
+        } else {
+          $(this).hide();
+        }
+      });
+    });
   }).fail(function () {
     alert('Error al cargar categorias');
   });
@@ -124,16 +124,26 @@ function EliminarCategoria(categoriaID) {
     // Send post request to server to delete the category
     $.post('../../Categorias/EliminarCategoria', { categoriaID: parseInt(categoriaID) })
       .done(function (resultado) {
-        resultado ? BuscarCategorias() : alert("No se pudo eliminar la categoria.");
+        if (resultado.success) {
+          // Display success message inside modal
+          $('#confirm-delete-modal .modal-body').html('<p>La categoría se ha eliminado correctamente.</p>');
+          // Refresh the list of categories after a short delay
+          setTimeout(function() {
+            BuscarCategorias();
+            $('#confirm-delete-modal').modal('hide');
+          }, 1000);
+        } else {
+          // Display error message inside modal
+          $('#confirm-delete-modal .modal-body').html('<p class="text-danger">' + resultado.message + '</p>');
+        }
       })
       .fail(function (xhr, status) {
-        alert('Disculpe, existió un problema');
+        // Display error message inside modal
+        $('#confirm-delete-modal .modal-body').html('<p>Disculpe, existió un problema.</p>');
       });
-      
-    // Hide the modal
-    $('#confirm-delete-modal').modal('hide');
   });
 }
+
 
 
 

@@ -132,14 +132,21 @@ public class CategoriasController : Controller
     public JsonResult EliminarCategoria(int categoriaID)
     {
         bool resultado = true;
+        var categoriaDesactivar = _contexto.Categorias.Find(categoriaID);
+
         if (categoriaID != 0)
         {
-            var categoriaDeshabilitar = _contexto.Categorias.Find(categoriaID);
-            if (categoriaDeshabilitar != null)
+            var categoriaProductos = (from a in _contexto.Productos where a.CategoriaID == categoriaID select a).ToList();
+            if (categoriaProductos.Count == 0)
             {
-                _contexto.Categorias.Remove(categoriaDeshabilitar);
+                _contexto.Categorias.Remove(categoriaDesactivar);
                 _contexto.SaveChanges();
                 resultado = true;
+            }
+            else
+            {
+                resultado = false;
+                return Json(new { success = false, message = "La categoría no se puede desactivar porque tiene productos asociados." });
             }
         }
         else
@@ -148,4 +155,5 @@ public class CategoriasController : Controller
         }
         return Json(resultado);
     }
+
 }
