@@ -36,7 +36,7 @@ public class CategoriasController : Controller
 
     public JsonResult GuardarCategoria(int categoriaID, string descripcion)
     {
-        int resultado = -1; // valor por defecto para indicar que falló (default)
+        int resultado = 0; // valor por defecto para indicar que falló (default)
 
         if (!string.IsNullOrEmpty(descripcion))
         {

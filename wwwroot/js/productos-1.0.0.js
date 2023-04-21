@@ -33,6 +33,24 @@ function GuardarProducto() {
     });
 }
 
+function EditarProducto(productoID) {
+  $.get('../../Productos/BuscarProductos', { productoID: productoID })
+    .done(function (productos) {
+      if (productos.length == 1) {
+        let producto = productos[0];
+        $("#Descripcion").val(producto.descripcion);
+        $("#ProductoID").val(producto.productoID);
+        $("#CategoriaID").val(producto.categoriaID);
+        LlenarCategorias(); // call the function to fill the categories dropdown
+        $("#ModalProducto").modal("show");
+      }
+    })
+    .fail(function () {
+      alert('Error al cargar productos');
+    });
+}
+
+
 function BuscarProductos() {
   $.ajax({
     url: '/Productos/BuscarProductos',
@@ -42,7 +60,7 @@ function BuscarProductos() {
       let tbodyProductos = $('#tbody-productos').empty();
       $.each(data, function(index, producto) {
         let acciones = `
-          <button class="btn btn-dark btn-sm editar" onClick="GuardarProducto(${producto.productoID})">Editar</button>
+          <button class="btn btn-dark btn-sm editar" onClick="EditarProducto(${producto.productoID})">Editar</button>
           <button class="btn btn-dark btn-sm" onClick="EliminarProducto(${producto.productoID})">X</button>
         `;
         tbodyProductos.append(`
@@ -71,8 +89,6 @@ function BuscarProductos() {
     }
   });
 }
-
-
 
 
 function LlenarCategorias() {

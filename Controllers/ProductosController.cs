@@ -73,13 +73,13 @@ public JsonResult BuscarCategorias()
     return Json(categorias);
 }
 
-public JsonResult GuardarProducto(int id, string descripcion, int categoriaID)
+public JsonResult GuardarProducto(int productoID, string descripcion, int categoriaID)
 {
     int resultado = 0;
 
     if (!string.IsNullOrEmpty(descripcion))
     {
-        if (id == 0)
+        if (productoID == 0)
         {
             var productoOriginal = _contexto.Productos.Where(p => p.Descripcion == descripcion && p.CategoriaID == categoriaID).FirstOrDefault();
             if (productoOriginal == null)
@@ -103,7 +103,7 @@ public JsonResult GuardarProducto(int id, string descripcion, int categoriaID)
             var productoOriginal = _contexto.Productos.Where(p => p.Descripcion == descripcion && p.CategoriaID == categoriaID).FirstOrDefault();
             if (productoOriginal == null)
             {
-                var productoEditar = _contexto.Productos.Find(id);
+                var productoEditar = _contexto.Productos.Find(productoID);
                 if (productoEditar != null)
                 {
                     productoEditar.Descripcion = descripcion;
