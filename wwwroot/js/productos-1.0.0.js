@@ -73,7 +73,7 @@ function GuardarProducto() {
       }
     })
     .fail(function () {
-      alert('Disculpe, existió un problema');
+      alert('La categoría no puede estar vacía. Por favor seleccione una categoría válida.');
     });
 }
 
