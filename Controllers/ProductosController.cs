@@ -75,7 +75,7 @@ public JsonResult BuscarCategorias()
 
 public JsonResult GuardarProducto(int id, string descripcion, int categoriaID)
 {
-    int resultado = -1;
+    int resultado = 0;
 
     if (!string.IsNullOrEmpty(descripcion))
     {
