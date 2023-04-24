@@ -59,23 +59,24 @@ function GuardarProducto() {
           BuscarProductos();
           break;
         case 1:
-          alert("El nombre ya existe. Por favor ingrese un nombre único.");
+          $("#DescripcionError").text("El nombre ya existe. Por favor ingrese un nombre único.");
           break;
         case 2:
-          alert("El nombre no puede estar vacío. Por favor ingrese un nombre válido.");
+          $("#DescripcionError").text("El nombre no puede estar vacío. Por favor ingrese un nombre válido.");
           break;
         case 3:
-          alert("La categoría no puede estar vacía. Por favor seleccione una categoría válida.");
+          $("#DescripcionError").text("La categoría no puede estar vacía. Por favor seleccione una categoría válida.");
           break;
         default:
-          alert("Ocurrió un error inesperado. Por favor inténtelo de nuevo más tarde.");
+          $("#DescripcionError").text("Ocurrió un error inesperado. Por favor inténtelo de nuevo más tarde.");
           break;
       }
     })
     .fail(function () {
-      alert('La categoría no puede estar vacía. Por favor seleccione una categoría válida.');
+      $("#DescripcionError").text("La categoría no puede estar vacía. Por favor seleccione una categoría válida.");
     });
 }
+
 
 function EditarProducto(productoID) {
   var modal = $('#ModalProducto');

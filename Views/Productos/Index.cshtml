@@ -20,6 +20,7 @@
                 <div>
                     <label class="control-label text-light">Nombre</label>
                     <input type="text" class="form-control" id="Descripcion" autocomplete="off" oninput="this.value = this.value.toUpperCase()" style="text-transform: uppercase;"/>
+                    <div class="text-danger" id="DescripcionError"></div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -28,6 +29,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="modal fade" id="confirm-delete-modal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel"
     aria-hidden="true">

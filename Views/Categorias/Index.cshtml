@@ -15,9 +15,15 @@
             <div class="modal-body">
                 <input type="hidden" id="CategoriaID" value="0" />
                 <div>
-                    <label class="control-label text-light">Nombre</label>
-                    <input type="text" class="form-control" id="Descripcion" autocomplete="off" oninput="this.value = this.value.toUpperCase()" style="text-transform: uppercase;"/>
+                    <label class="control-label text-light" for="Descripcion">Nombre</label>
+                    <input type="text" class="form-control" id="Descripcion" name="Descripcion" autocomplete="off"
+                        oninput="this.value = this.value.toUpperCase()" style="text-transform: uppercase;"
+                        data-val="true" data-val-required="La descripción es obligatoria." data-val-length-max="50"
+                        data-val-length="La descripción no puede tener más de 50 caracteres." />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Descripcion"
+                        data-valmsg-replace="true"></span>
                 </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" onclick="GuardarCategoria()" class="btn btn-dark text-light">Guardar
