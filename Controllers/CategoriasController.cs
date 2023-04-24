@@ -143,6 +143,7 @@ public class CategoriasController : Controller
                 {
                     _contexto.Categorias.Remove(categoriaEliminar);
                     _contexto.SaveChanges();
+                    return Json(new { success = true, message = "La categoría se eliminó de la base de datos." });
                     resultado = true;
                 }
                 else
@@ -161,6 +162,7 @@ public class CategoriasController : Controller
         else
         {
             resultado = false;
+            return Json(new { success = false, message = "La categoría no se encontró en la base de datos." });
         }
         return Json(resultado);
     }

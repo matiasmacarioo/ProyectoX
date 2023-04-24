@@ -141,7 +141,7 @@ function EliminarCategoria(categoriaID) {
       .done(function (resultado) {
         if (resultado.success) {
           // Display success message inside modal
-          $('#confirm-delete-modal .modal-body').html('<p>La categoría se ha eliminado correctamente.</p>');
+          $('#confirm-delete-modal .modal-body').html('<p class="text-success">La categoría se ha eliminado correctamente.</p>');
           // Refresh the list of categories after a short delay
           setTimeout(function() {
             BuscarCategorias();
@@ -154,7 +154,7 @@ function EliminarCategoria(categoriaID) {
       })
       .fail(function (xhr, status) {
         // Display error message inside modal
-        $('#confirm-delete-modal .modal-body').html('<p>Disculpe, existió un problema.</p>');
+        $('#confirm-delete-modal .modal-body').html('<p>Fail</p>');
       });
   });
 }
