@@ -124,7 +124,7 @@ function LlenarCategorias() {
 function VaciarFormulario() {
   var modal = $('#ModalCategoria');
   var title = $('#exampleModalLabel');
-  title.text('Agregar Categoría');
+  title.text('Agregar Producto');
 
   $("#Descripcion").val('');
   $("#CategoriaID").val(0);
