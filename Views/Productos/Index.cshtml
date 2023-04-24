@@ -56,12 +56,13 @@
     <!-- Search bar -->
 
     <!-- Button trigger modal -->
-<div class="mb-2">
-  <button type="button" onclick="LlenarCategorias(); VaciarFormulario();" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalProducto">
-    Nuevo
-  </button>
-</div>
-
+    @if(User.Identity.IsAuthenticated){
+        <div class="mb-2">
+            <button type="button" onclick="LlenarCategorias(); VaciarFormulario();" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalProducto">
+             Nuevo
+             </button>
+        </div>
+    }
 
 <table class="table table-bordered table-striped table-condensed glass-bg table-responsive table-rounded table-hover">
   <thead>
@@ -76,7 +77,7 @@
     <tr>
       <th class="text-white col-sm-7">Nombre</th>
       <th class="text-white col-sm-4">Categoria</th>
-      <th class="text-light text-center col-sm-2">Acciones</th>
+    @if(User.Identity.IsAuthenticated){<th class="text-light text-center col-sm-2">Acciones</th>}
     </tr>
   </thead>
   <tbody id="tbody-productos">
