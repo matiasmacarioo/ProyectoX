@@ -143,7 +143,7 @@ function EliminarCategoria(categoriaID) {
           setTimeout(function () {
             BuscarCategorias();
             $('#confirm-delete-modal').modal('hide');
-          }, 1000);
+          }, 650);
         } else {
           // Display error message inside modal
           $('#confirm-delete-modal .modal-body').html('<p class="text-danger">' + resultado.message + '</p>');

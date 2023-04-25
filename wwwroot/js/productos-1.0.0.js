@@ -162,15 +162,19 @@ function EliminarProducto(productoID) {
     // Send post request to server to delete the category
     $.post('../../Productos/EliminarProducto', { productoID: parseInt(productoID) })
       .done(function (resultado) {
-        resultado ? BuscarProductos() : $('#confirm-delete-modal .modal-body').html('<p>No se pudo eliminar el producto.</p>');
-            // Hide the modal
+        if (resultado) {
+          $('#confirm-delete-modal .modal-body').html('<p class="text-success">El producto se ha eliminado.</p>');
+          setTimeout(function () {
+            BuscarProductos();
             $('#confirm-delete-modal').modal('hide');
+          }, 650);
+        } else {
+          $('#confirm-delete-modal .modal-body').html('<p class="text-danger">No se pudo eliminar el producto.</p>');
+        }
       })
       .fail(function (xhr, status) {
         $('#confirm-delete-modal .modal-body').html('<p>Primero debe iniciar sesión.</p>');
         $('#confirm-delete-btn').html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
       });
-      
-
   });
 }
