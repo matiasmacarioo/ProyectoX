@@ -36,8 +36,8 @@ a {
 
 .card {
   background-color: #ffffff13;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   padding: 20px;
   margin: auto;
@@ -52,6 +52,8 @@ a {
 .card:hover {
   background-color: #ffffff1c;
   filter: saturate(1.4);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
 }
 
 
@@ -220,4 +222,10 @@ p{
 
 .btn-group > .btn-group:not(:first-child), .btn-group > .btn:not(:first-child) {
 	margin-left: 0px;
+}
+
+.alert-success {
+  color: #ffffff;
+  background-color: #ffffff4d;
+  border-color: #ffffff;
 }
