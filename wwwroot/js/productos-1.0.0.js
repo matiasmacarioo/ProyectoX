@@ -73,7 +73,7 @@ function GuardarProducto() {
       }
     })
     .fail(function () {
-      $("#DescripcionError").text("La categoría no puede estar vacía. Por favor seleccione una categoría válida.");
+      $("#DescripcionError").text("Primero debe iniciar sesión.");
     });
 }
 
@@ -92,7 +92,7 @@ function EditarProducto(productoID) {
         $("#CategoriaID").val(producto.categoriaID);
         LlenarCategorias(); // call the function to fill the categories dropdown
         
-        // Change modal title based on mode
+        // Change modal title based on the button
         if (modo === 'editar') {
           title.text('Editar Producto');
         } else {

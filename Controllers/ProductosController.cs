@@ -1,6 +1,7 @@
 
 
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -59,54 +60,67 @@ public class ProductosController : Controller
         return Json(categorias);
     }
 
+    [Authorize]
     public JsonResult GuardarProducto(int productoID, string descripcion, int categoriaID)
     {
         int resultado = 0;
 
-        if (!string.IsNullOrEmpty(descripcion))
+        if (categoriaID != 0)
         {
-            if (productoID == 0)
+            // comprueba que la descripcion recibida no este vacia.
+            if (!string.IsNullOrEmpty(descripcion))
             {
-                var productoOriginal = _contexto.Productos.Where(p => p.Descripcion == descripcion && p.CategoriaID == categoriaID).FirstOrDefault();
-                if (productoOriginal == null)
+                // crea un nuevo producto
+                if (productoID == 0)
                 {
-                    var productoGuardar = new Producto
+                    var productoOriginal = _contexto.Productos.Where(p => p.Descripcion == descripcion && p.CategoriaID == categoriaID).FirstOrDefault();
+                    if (productoOriginal == null)
                     {
-                        Descripcion = descripcion,
-                        CategoriaID = categoriaID
-                    };
-                    _contexto.Add(productoGuardar);
-                    _contexto.SaveChanges();
-                    resultado = 0;
+                        var productoGuardar = new Producto
+                        {
+                            Descripcion = descripcion,
+                            CategoriaID = categoriaID
+                        };
+                        _contexto.Add(productoGuardar);
+                        _contexto.SaveChanges();
+                        resultado = 0;
+                    }
+                    else
+                    {
+                        resultado = 1;
+                    }
                 }
                 else
+                // edita un producto ya creado
                 {
-                    resultado = 1;
+                    // comprueba que el nombre del producto sea diferente a otros en la misma categoría
+                    var productoOriginal = _contexto.Productos.Where(p => p.Descripcion == descripcion && p.CategoriaID == categoriaID).FirstOrDefault();
+                    if (productoOriginal == null)
+                    {
+                        var productoEditar = _contexto.Productos.Find(productoID);
+                        if (productoEditar != null)
+                        {
+                            productoEditar.Descripcion = descripcion;
+                            productoEditar.CategoriaID = categoriaID;
+                            _contexto.SaveChanges();
+                            resultado = 0;
+                        }
+                    }
+                    else
+                    {
+                        resultado = 1;
+                    }
                 }
             }
             else
             {
-                var productoOriginal = _contexto.Productos.Where(p => p.Descripcion == descripcion && p.CategoriaID == categoriaID).FirstOrDefault();
-                if (productoOriginal == null)
-                {
-                    var productoEditar = _contexto.Productos.Find(productoID);
-                    if (productoEditar != null)
-                    {
-                        productoEditar.Descripcion = descripcion;
-                        productoEditar.CategoriaID = categoriaID;
-                        _contexto.SaveChanges();
-                        resultado = 0;
-                    }
-                }
-                else
-                {
-                    resultado = 1;
-                }
+                resultado = 2;
             }
+
         }
         else
         {
-            resultado = 2;
+            resultado = 3;
         }
 
         return Json(resultado);
