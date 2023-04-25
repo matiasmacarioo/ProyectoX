@@ -109,7 +109,7 @@ function BuscarCategoria(categoriaID) {
 function DeshabilitarCategoria(categoriaID, button) {
   $.post('../../Categorias/DeshabilitarCategoria', { categoriaID: parseInt(categoriaID) })
     .done(function (resultado) {
-      resultado ? BuscarCategorias() : alert("No se pudo deshabilitar la categoria.");
+      resultado ? BuscarCategorias() : $(button).text('Error');
     })
     .fail(function (xhr, status) {
       $(button).html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
@@ -120,7 +120,7 @@ function DeshabilitarCategoria(categoriaID, button) {
 function HabilitarCategoria(categoriaID, button) {
   $.post('../../Categorias/HabilitarCategoria', { categoriaID: categoriaID })
     .done(function (resultado) {
-      resultado ? BuscarCategorias() : alert('No se pudo habilitar la categoria.');
+      resultado ? BuscarCategorias() : $(button).text('Error');
     })
     .fail(function () {
       $(button).html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
