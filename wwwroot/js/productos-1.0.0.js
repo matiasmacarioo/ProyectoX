@@ -5,18 +5,18 @@ function BuscarProductos() {
     url: '/Productos/BuscarProductos',
     method: 'GET',
     success: function(data) {
-      console.log(data); // Log the retrieved products to the console
+      // console.log(data); // Log the retrieved products to the console
       let tbodyProductos = $('#tbody-productos').empty();
       $.each(data, function(index, producto) {
         let acciones = `
-          <button class="btn btn-dark btn-sm editar" onClick="EditarProducto(${producto.productoID}, 'editar')">Editar</button>
-          <button class="btn btn-dark btn-sm" onClick="EliminarProducto(${producto.productoID})">X</button>
+          <button class="btn btn-dark btn-sm editar" onClick="EditarProducto(${producto.productoID}, 'editar', this)">Editar</button>
+          <button class="btn btn-dark btn-sm" onClick="EliminarProducto(${producto.productoID}, this)">X</button>
         `;
         let botonDeshabilitar = '';
         if (producto.eliminado) {
-          botonDeshabilitar = `<button class="btn btn-dark btn-sm habilitar" onclick="HabilitarProducto('${producto.productoID}')">Habilitar</button>`;
+          botonDeshabilitar = `<button class="btn btn-dark btn-sm habilitar" onclick="HabilitarProducto('${producto.productoID}', this)">Habilitar</button>`;
         } else {
-          botonDeshabilitar = `<button class="btn btn-dark btn-sm deshabilitar" onclick="DeshabilitarProducto('${producto.productoID}')">Deshabilitar</button>`;
+          botonDeshabilitar = `<button class="btn btn-dark btn-sm deshabilitar" onclick="DeshabilitarProducto('${producto.productoID}', this)">Deshabilitar</button>`;
         }
         tbodyProductos.append(`
           <tr>
@@ -46,7 +46,7 @@ function BuscarProductos() {
 }
 
 
-function GuardarProducto() {
+function GuardarProducto(button) {
   let descripcion = $("#Descripcion").val();
   let categoriaID = $("#CategoriaID").val();
   let productoID = $("#ProductoID").val();
@@ -74,6 +74,7 @@ function GuardarProducto() {
     })
     .fail(function () {
       $("#DescripcionError").text("Primero debe iniciar sesión.");
+      $(button).html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
     });
 }
 
@@ -131,25 +132,30 @@ function VaciarFormulario() {
   $("#ProductoID").val(0);
 }
 
-function DeshabilitarProducto(productoID) {
+function DeshabilitarProducto(productoID, button) {
   $.post('../../Productos/DeshabilitarProducto', { productoID: parseInt(productoID) })
     .done(function (resultado) {
-      resultado ? BuscarProductos() : alert("No se pudo deshabilitar el producto.");
+      // resultado ? BuscarProductos() : alert("No se pudo deshabilitar el producto.");
+      resultado ? BuscarProductos() : $(button).text('Error');
     })
     .fail(function (xhr, status) {
-      alert('Disculpe, existió un problema');
+      $(button).html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
+      // alert('Primero debe iniciar sesión.');
+      // $(button).text('Inicia sesión');
     });
 }
 
-function HabilitarProducto(productoID) {
+
+function HabilitarProducto(productoID, button) {
   $.post('../../Productos/HabilitarProducto', { productoID: productoID })
     .done(function (resultado) {
-      resultado ? BuscarProductos() : alert('No se pudo habilitar el producto.');
+      resultado ? BuscarProductos() : $(button).text('Error');
     })
     .fail(function () {
-      alert('Error al habilitar la producto.');
+      $(button).html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
     });
 }
+
 
 function EliminarProducto(productoID) {
   // Show confirmation modal
@@ -160,13 +166,15 @@ function EliminarProducto(productoID) {
     // Send post request to server to delete the category
     $.post('../../Productos/EliminarProducto', { productoID: parseInt(productoID) })
       .done(function (resultado) {
-        resultado ? BuscarProductos() : alert("No se pudo eliminar el producto.");
+        resultado ? BuscarProductos() : $('#confirm-delete-modal .modal-body').html('<p>No se pudo eliminar el producto.</p>');
+            // Hide the modal
+            $('#confirm-delete-modal').modal('hide');
       })
       .fail(function (xhr, status) {
-        alert('Disculpe, existió un problema');
+        $('#confirm-delete-modal .modal-body').html('<p>Primero debe iniciar sesión.</p>');
+        $('#confirm-delete-btn').html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
       });
       
-    // Hide the modal
-    $('#confirm-delete-modal').modal('hide');
+
   });
 }

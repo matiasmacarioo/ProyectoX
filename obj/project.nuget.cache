@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ahjv/KaC4cTTGQH8d68mb6LkA1IoDAxaY/60yCcKKXtvVxM6bMvsz2Bl+h/SO8RVNey8DFdSDIY/zKYebFmXMA==",
+  "dgSpecHash": "4dk6pJeUDcLPbWZ1+ht26lCSUwwE/kwUNEBLeVPRjoHBVpgsSUk1vMGYTAYQzagvVgAQbYGbTvecZR5XwPheEw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Matias\\ProyectoX-1\\ProyectoX.csproj",
+  "projectFilePath": "C:\\Users\\Matias\\ProyectoX\\ProyectoX.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Matias\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Matias\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
