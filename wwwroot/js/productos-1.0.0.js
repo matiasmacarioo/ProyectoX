@@ -45,7 +45,6 @@ function BuscarProductos() {
   });
 }
 
-
 function GuardarProducto(button) {
   let descripcion = $("#Descripcion").val();
   let categoriaID = $("#CategoriaID").val();
@@ -77,7 +76,6 @@ function GuardarProducto(button) {
       $(button).html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
     });
 }
-
 
 function EditarProducto(productoID) {
   var modal = $('#ModalProducto');
@@ -145,7 +143,6 @@ function DeshabilitarProducto(productoID, button) {
     });
 }
 
-
 function HabilitarProducto(productoID, button) {
   $.post('../../Productos/HabilitarProducto', { productoID: productoID })
     .done(function (resultado) {
@@ -155,7 +152,6 @@ function HabilitarProducto(productoID, button) {
       $(button).html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
     });
 }
-
 
 function EliminarProducto(productoID) {
   // Show confirmation modal

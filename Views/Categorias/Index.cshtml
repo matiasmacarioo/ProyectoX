@@ -20,14 +20,15 @@
                         oninput="this.value = this.value.toUpperCase()" style="text-transform: uppercase;"
                         data-val="true" data-val-required="La descripción es obligatoria." data-val-length-max="50"
                         data-val-length="La descripción no puede tener más de 50 caracteres." />
+                    <div class="text-danger" id="DescripcionError"></div>
                     <span class="field-validation-valid text-danger" data-valmsg-for="Descripcion"
                         data-valmsg-replace="true"></span>
                 </div>
 
             </div>
             <div class="modal-footer">
-                <button type="button" onclick="GuardarCategoria()" class="btn btn-dark text-light">Guardar
-                    cambios</button>
+                <button id="guardar-cambios-btn" type="button" onclick="GuardarCategoria()"
+                    class="btn btn-dark text-light">Guardar cambios</button>
             </div>
         </div>
     </div>
@@ -60,13 +61,14 @@
     <!-- Search bar -->
 
     <!-- Button trigger modal -->
-    @if(User.Identity.IsAuthenticated){
-    <div class="mb-2">
-        <button type="button" onclick="VaciarFormulario()" class="btn btn-dark" data-bs-toggle="modal"
-            data-bs-target="#ModalCategoria">
-            Nueva
-        </button>
-    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="mb-2">
+            <button type="button" onclick="VaciarFormulario()" class="btn btn-dark" data-bs-toggle="modal"
+                data-bs-target="#ModalCategoria">
+                Nueva
+            </button>
+        </div>
     }
     <table
         class="table table-bordered table-striped table-condensed glass-bg table-responsive table-rounded table-hover">

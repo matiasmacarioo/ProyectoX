@@ -5,7 +5,7 @@ window.onload = BuscarCategorias();
 // si la categoría se guarda correctamente, oculta el modal y actualiza la lista de categorías.
 // si una categoría con la misma descripción ya existe, muestra una alerta de error.
 // Si se está editando una categoría existente, la función actualiza la información de la categoría existente en lugar de crear una nueva.
-function GuardarCategoria() {
+function GuardarCategoria(button) {
   let descripcion = $("#Descripcion").val();
   let categoriaID = $("#CategoriaID").val();
 
@@ -17,21 +17,21 @@ function GuardarCategoria() {
           BuscarCategorias();
           break;
         case 1:
-          alert("La descripción ya existe. Por favor ingrese una descripción única.");
+          $("#DescripcionError").text("El nombre ya existe. Por favor ingrese un nombre único.");
           break;
         case 2:
-          alert("La descripción no puede estar vacía. Por favor ingrese una descripción válida.");
+          $("#DescripcionError").text("El nombre no puede estar vacío. Por favor ingrese un nombre válido.");
           break;
         default:
-          alert("Ocurrió un error inesperado. Por favor inténtelo de nuevo más tarde.");
+          $("#DescripcionError").text("Ocurrió un error inesperado. Por favor inténtelo de nuevo más tarde.");
           break;
       }
     })
     .fail(function () {
-      alert('Disculpe, existió un problema');
+      $("#DescripcionError").text("Primero debe iniciar sesión.");
+      $('#guardar-cambios-btn').html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
     });
 }
-
 
 // esta función realiza una llamada AJAX para obtener una lista de categorías desde el servidor y mostrarla en la página.
 function BuscarCategorias() {
@@ -43,9 +43,9 @@ function BuscarCategorias() {
       // console.log('Procesando categoria:', categoria);
       let botonDeshabilitar = '';
       if (categoria.eliminado) {
-        botonDeshabilitar = `<button class="btn btn-dark btn-sm habilitar" onclick="HabilitarCategoria('${categoria.categoriaID}')">Habilitar</button>`;
+        botonDeshabilitar = `<button class="btn btn-dark btn-sm habilitar" onclick="HabilitarCategoria('${categoria.categoriaID}', this)">Habilitar</button>`;
       } else {
-        botonDeshabilitar = `<button class="btn btn-dark btn-sm deshabilitar" onclick="DeshabilitarCategoria('${categoria.categoriaID}')">Deshabilitar</button>`;
+        botonDeshabilitar = `<button class="btn btn-dark btn-sm deshabilitar" onclick="DeshabilitarCategoria('${categoria.categoriaID}', this)">Deshabilitar</button>`;
       }
       tbodyCategorias.append(`
           <tr>
@@ -76,7 +76,6 @@ function BuscarCategorias() {
   });
 }
 
-
 // esta función recibe un ID de categoría como argumento y realiza una llamada AJAX para obtener la información de esa categoría desde el servidor y mostrarla en un formulario en la página.
 function BuscarCategoria(categoriaID) {
   var modal = $('#ModalCategoria');
@@ -89,7 +88,7 @@ function BuscarCategoria(categoriaID) {
         let categoria = categorias[0];
         $("#Descripcion").val(categoria.descripcion);
         $("#CategoriaID").val(categoria.categoriaID);
-        
+
         // Change modal title based on mode
         if (modo === 'editar') {
           title.text('Editar Categoría');
@@ -106,36 +105,34 @@ function BuscarCategoria(categoriaID) {
     });
 }
 
-
-
 // esta función recibe un ID de categoría como argumento y realiza una llamada AJAX para deshabilitar esa categoría en la base de datos.
-function DeshabilitarCategoria(categoriaID) {
+function DeshabilitarCategoria(categoriaID, button) {
   $.post('../../Categorias/DeshabilitarCategoria', { categoriaID: parseInt(categoriaID) })
     .done(function (resultado) {
       resultado ? BuscarCategorias() : alert("No se pudo deshabilitar la categoria.");
     })
     .fail(function (xhr, status) {
-      alert('Disculpe, existió un problema');
+      $(button).html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
     });
 }
 
 // esta función recibe un ID de categoría como argumento y realiza una llamada AJAX para habilitar esa categoría en la base de datos.
-function HabilitarCategoria(categoriaID) {
+function HabilitarCategoria(categoriaID, button) {
   $.post('../../Categorias/HabilitarCategoria', { categoriaID: categoriaID })
     .done(function (resultado) {
       resultado ? BuscarCategorias() : alert('No se pudo habilitar la categoria.');
     })
     .fail(function () {
-      alert('Error al habilitar la categoria.');
+      $(button).html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
     });
 }
 
 function EliminarCategoria(categoriaID) {
   // Show confirmation modal
   $('#confirm-delete-modal').modal('show');
-  
+
   // Add event listener to delete button in modal
-  $('#confirm-delete-btn').click(function() {
+  $('#confirm-delete-btn').click(function () {
     // Send post request to server to delete the category
     $.post('../../Categorias/EliminarCategoria', { categoriaID: parseInt(categoriaID) })
       .done(function (resultado) {
@@ -143,7 +140,7 @@ function EliminarCategoria(categoriaID) {
           // Display success message inside modal
           $('#confirm-delete-modal .modal-body').html('<p class="text-success">La categoría se ha eliminado correctamente.</p>');
           // Refresh the list of categories after a short delay
-          setTimeout(function() {
+          setTimeout(function () {
             BuscarCategorias();
             $('#confirm-delete-modal').modal('hide');
           }, 1000);
@@ -153,8 +150,8 @@ function EliminarCategoria(categoriaID) {
         }
       })
       .fail(function (xhr, status) {
-        // Display error message inside modal
-        $('#confirm-delete-modal .modal-body').html('<p>Fail</p>');
+        $('#confirm-delete-modal .modal-body').html('<p>Primero debe iniciar sesión.</p>');
+        $('#confirm-delete-btn').html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
       });
   });
 }
@@ -164,7 +161,7 @@ function VaciarFormulario() {
   var modal = $('#ModalCategoria');
   var title = $('#exampleModalLabel');
   title.text('Agregar Categoría');
-  
+
   // Clear form fields
   $("#Descripcion").val('');
   $("#CategoriaID").val(0);
