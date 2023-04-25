@@ -60,12 +60,14 @@
     <!-- Search bar -->
 
     <!-- Button trigger modal -->
+    @if(User.Identity.IsAuthenticated){
     <div class="mb-2">
         <button type="button" onclick="VaciarFormulario()" class="btn btn-dark" data-bs-toggle="modal"
             data-bs-target="#ModalCategoria">
             Nueva
         </button>
     </div>
+    }
     <table
         class="table table-bordered table-striped table-condensed glass-bg table-responsive table-rounded table-hover">
         <thead>

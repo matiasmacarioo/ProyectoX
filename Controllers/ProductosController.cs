@@ -126,6 +126,8 @@ public class ProductosController : Controller
         return Json(resultado);
     }
 
+    [Authorize]
+
     public JsonResult DeshabilitarProducto(int productoID)
     {
         bool resultado = true;
@@ -147,6 +149,8 @@ public class ProductosController : Controller
         return Json(resultado);
     }
 
+    [Authorize]
+
     public JsonResult HabilitarProducto(int productoID)
     {
         bool resultado = true;
@@ -166,6 +170,8 @@ public class ProductosController : Controller
         }
         return Json(resultado);
     }
+
+    [Authorize]
 
     public JsonResult EliminarProducto(int productoID)
     {

@@ -1,5 +1,6 @@
 
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoX.Data;
 using ProyectoX.Models;
@@ -34,6 +35,7 @@ public class CategoriasController : Controller
         return Json(categorias);
     }
 
+    [Authorize]
     public JsonResult GuardarCategoria(int categoriaID, string descripcion)
     {
         int resultado = 0; // valor por defecto para indicar que falló (default)
@@ -88,6 +90,7 @@ public class CategoriasController : Controller
         return Json(resultado);
     }
 
+    [Authorize]
     public JsonResult DeshabilitarCategoria(int categoriaID)
     {
         bool resultado = true;
@@ -109,6 +112,7 @@ public class CategoriasController : Controller
         return Json(resultado);
     }
 
+    [Authorize]
     public JsonResult HabilitarCategoria(int categoriaID)
     {
         bool resultado = true;
@@ -129,6 +133,7 @@ public class CategoriasController : Controller
         return Json(resultado);
     }
 
+    [Authorize]
     public JsonResult EliminarCategoria(int categoriaID)
     {
         bool resultado = true;
