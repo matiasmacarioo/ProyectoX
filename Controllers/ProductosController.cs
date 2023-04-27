@@ -31,7 +31,8 @@ public class ProductosController : Controller
     {
         List<VistaProducto> ProductosMostrar = new List<VistaProducto>();
 
-        var Productos = _contexto.Productos.Include(s => s.Categoria).ToList();
+        // busca los productos en categorias habilitadas y las ordena por descripcion
+        var Productos = _contexto.Productos.Include(p => p.Categoria).Where(p => p.Categoria.Eliminado == false).OrderBy(p => p.Descripcion).ToList();
 
         if (ProductoID > 0)
         {
