@@ -12,6 +12,6 @@ namespace ProyectoX.Models
         [StringLength(50, ErrorMessage = "La descripción no puede tener más de 50 caracteres.")]
         public string? Descripcion { get; set; }
         public bool Eliminado { get; set; }
-        public virtual ICollection<Producto> Productos { get; set; }
+        public virtual ICollection<Producto>? Productos { get; set; }
     }
 }
