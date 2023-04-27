@@ -57,7 +57,7 @@ public class ProductosController : Controller
 
     public JsonResult BuscarCategorias()
     {
-        var categorias = _contexto.Categorias.ToList();
+        var categorias = _contexto.Categorias.OrderBy(c => c.Descripcion).ToList();
         return Json(categorias);
     }
 
