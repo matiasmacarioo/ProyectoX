@@ -160,17 +160,20 @@ function EliminarCategoria(categoriaID) {
       // Reset modal content to default
       $('#confirm-delete-modal .modal-body').html('<p>¿Está seguro que desea eliminar este producto?</p>');
     });
-    
+
 }
 
 // esta función limpia los campos del modal.
 function VaciarFormulario() {
-  var modal = $('#ModalCategoria');
   var title = $('#exampleModalLabel');
   title.text('Agregar Categoría');
 
   // Clear form fields
   $("#Descripcion").val('');
   $("#CategoriaID").val(0);
-
 }
+
+$('#ModalCategoria').on('shown.bs.modal', function () {
+  $('#Descripcion').focus();
+});
+

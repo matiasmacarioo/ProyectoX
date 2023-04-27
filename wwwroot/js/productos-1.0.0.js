@@ -185,3 +185,8 @@ function EliminarProducto(productoID) {
   });
 
 }
+
+
+$('#ModalProducto').on('shown.bs.modal', function () {
+  $('#Descripcion').focus();
+});
