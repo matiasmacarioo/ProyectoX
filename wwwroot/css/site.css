@@ -262,8 +262,8 @@ button.close {
 
 
 .fade_error {
-  background-color: #ffdbdbad;
-  border: 1px solid #f95668
+  background-color: #ffffffad;
+  border: 1px solid #ffffff
 }
 
 .fade_error .close {
