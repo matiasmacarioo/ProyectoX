@@ -25,7 +25,7 @@ public class CategoriasController : Controller
 
     public JsonResult BuscarCategorias(int categoriaID = 0)
     {
-        var categorias = _contexto.Categorias.ToList();
+        var categorias = _contexto.Categorias.OrderBy(c => c.Descripcion).ToList();
 
         if (categoriaID > 0)
         {
