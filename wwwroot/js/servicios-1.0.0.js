@@ -113,12 +113,12 @@ function EditarServicio(servicioID) {
 function LlenarProductos() {
   $.get('../../Servicios/BuscarProductos', function (productos) {
     let selectProductos = $("#ProductoID").empty();
-    selectProductos.append('<option value="0" selected>Seleccione una categoría</option>');
+    selectProductos.append('<option value="0" selected>Seleccione un producto</option>');
     $.each(productos, function (index, producto) {
       $('#ProductoID').append($('<option></option>').val(producto.productoID).text(producto.descripcion));
     });      
   }).fail(function () {
-    alert('Error al cargar categorías');
+    alert('Error al cargar productos');
   });
 }
 

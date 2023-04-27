@@ -126,11 +126,11 @@ public class ServiciosController : Controller
     //     return Json(ServiciosMostrar);
     // }
 
-    // public JsonResult BuscarCategorias()
-    // {
-    //     var categorias = _contexto.Categorias.OrderBy(c => c.Descripcion).ToList();
-    //     return Json(categorias);
-    // }
+    public JsonResult BuscarProductos()
+    {
+        var productos = _contexto.Productos.OrderBy(c => c.Descripcion).ToList();
+        return Json(productos);
+    }
 
 
     // [Authorize]
