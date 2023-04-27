@@ -154,6 +154,13 @@ function EliminarCategoria(categoriaID) {
         $('#confirm-delete-btn').html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
       });
   });
+
+    // Add event listener to modal hidden event
+    $('#confirm-delete-modal').on('hidden.bs.modal', function() {
+      // Reset modal content to default
+      $('#confirm-delete-modal .modal-body').html('<p>¿Está seguro que desea eliminar este producto?</p>');
+    });
+    
 }
 
 // esta función limpia los campos del modal.
