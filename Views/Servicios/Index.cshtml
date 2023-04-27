@@ -1,0 +1,99 @@
+@{
+    ViewData["Title"] = "Servicios";
+}
+
+<!-- Modal -->
+<div class="modal fade" id="ModalServicio" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Servicio</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="ServicioID" value="0" />
+                <div>
+                    <label class="control-label text-light">Producto</label>
+                    <select id="ProductoID" class="form-control">
+                    </select>
+                </div>
+                <div>
+                    <label class="control-label text-light">Nombre</label>
+                    <input type="text" class="form-control" id="Descripcion" autocomplete="off" oninput="this.value = this.value.toUpperCase()" style="text-transform: uppercase;"/>
+                    <div class="text-danger" id="DescripcionError"></div>
+                </div>
+                <div>
+                    <label class="control-label text-light">Dirección</label>
+                    <input type="text" class="form-control" id="Direccion" autocomplete="off" oninput="this.value = this.value.toUpperCase()" style="text-transform: uppercase;"/>
+                    <div class="text-danger" id="DireccionError"></div>
+                </div>
+                <div>
+                    <label class="control-label text-light">Teléfono</label>
+                    <input type="tel" class="form-control" id="Telefono" autocomplete="off" oninput="this.value = this.value.toUpperCase()" style="text-transform: uppercase;"/>
+                    <div class="text-danger" id="TelefonoError"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="GuardarServicio(this)" class="btn btn-dark text-light">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="confirm-delete-modal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-light">
+                <p>¿Estás seguro que deseas eliminar este servicio?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirm-delete-btn">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <h1 class="display-4">Servicios</h1>
+
+    <!-- Search bar -->
+
+    <!-- Button trigger modal -->
+    @if(User.Identity.IsAuthenticated){
+        <div class="mb-2">
+            <button type="button" onclick="LlenarProductos(); VaciarFormulario();" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalServicio">
+             Nuevo
+             </button>
+        </div>
+    }
+
+<table class="table table-bordered table-striped table-condensed glass-bg table-responsive table-rounded table-hover">
+  <thead>
+    <div class="form-group">
+      <div class="input-group">
+        <input type="text" class="form-control rounded-pill glass-bg" id="busqueda" placeholder="Buscar...">
+        <span class="input-group-addon">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+    </div>
+    <tr>
+      <th class="text-white col-sm-7">Nombre</th>
+      <th class="text-white col-sm-4">Producto</th>
+      <th class="text-light text-center col-sm-2">Acciones</th>
+    </tr>
+  </thead>
+  <tbody id="tbody-servicios">
+  </tbody>
+</table>
+
+@section Scripts{
+    <script src="~/js/servicios-1.0.0.js"></script>
+}
