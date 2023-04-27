@@ -58,7 +58,7 @@ function GuardarProducto(button) {
           BuscarProductos();
           break;
         case 1:
-          $("#DescripcionError").text("El nombre ya existe. Por favor ingrese un nombre único.");
+          $("#DescripcionError").html(`<div class="alert fade_error .fade"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <strong>El nombre ya existe. Por favor ingrese un nombre único.</strong> </div>`);
           break;
         case 2:
           $("#DescripcionError").text("El nombre no puede estar vacío. Por favor ingrese un nombre válido.");
