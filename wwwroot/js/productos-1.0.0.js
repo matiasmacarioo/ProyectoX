@@ -113,8 +113,13 @@ function LlenarCategorias() {
     let selectCategorias = $("#CategoriaID").empty();
     selectCategorias.append('<option value="0" selected>Seleccione una categoría</option>');
     $.each(categorias, function (index, categoria) {
-      $('#CategoriaID').append($('<option></option>').val(categoria.categoriaID).text(categoria.descripcion));
-    });      
+      let option = $('<option></option>').val(categoria.categoriaID).text(categoria.descripcion);
+      if (categoria.eliminado) {
+        // option.attr("disabled", true); // deshabilitar opción
+        option.text(categoria.descripcion + " (deshabilitado)"); // agregar texto indicando que está deshabilitado
+      }
+      $('#CategoriaID').append(option);
+    });    
   }).fail(function () {
     alert('Error al cargar categorías');
   });

@@ -129,8 +129,13 @@ function LlenarProductos() {
     let selectProductos = $("#ProductoID").empty();
     selectProductos.append('<option value="0" selected>Seleccione un producto</option>');
     $.each(productos, function (index, producto) {
-      $('#ProductoID').append($('<option></option>').val(producto.productoID).text(producto.descripcion));
-    });
+      let option = $('<option></option>').val(producto.productoID).text(producto.descripcion);
+      if (producto.eliminado) {
+        // option.attr("disabled", true); // deshabilitar opción
+        option.text(producto.descripcion + " (deshabilitado)"); // agregar texto indicando que está deshabilitado
+      }
+      $('#ProductoID').append(option);
+    });    
   }).fail(function () {
     alert('Error al cargar productos');
   });
