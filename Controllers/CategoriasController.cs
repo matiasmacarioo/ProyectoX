@@ -141,8 +141,8 @@ public class CategoriasController : Controller
 
         if (categoriaID != 0)
         {
-            var categoriaProductos = (from a in _contexto.Productos where a.CategoriaID == categoriaID select a).ToList();
-            if (categoriaProductos.Count == 0)
+            var productosEnCategoria = (from a in _contexto.Productos where a.CategoriaID == categoriaID select a).ToList();
+            if (productosEnCategoria.Count == 0)
             {
                 if (categoriaEliminar != null)
                 {

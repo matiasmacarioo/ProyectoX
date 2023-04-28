@@ -173,18 +173,27 @@ public class ProductosController : Controller
     }
 
     [Authorize]
-
     public JsonResult EliminarProducto(int productoID)
     {
         bool resultado = true;
         if (productoID != 0)
         {
-            var productoDeshabilitar = _contexto.Productos.Find(productoID);
-            if (productoDeshabilitar != null)
+            var serviciosEnProducto = (from a in _contexto.Servicios where a.ProductoID == productoID select a).ToList();
+            if (serviciosEnProducto.Count == 0)
             {
-                _contexto.Productos.Remove(productoDeshabilitar);
-                _contexto.SaveChanges();
-                resultado = true;
+
+                var productoDeshabilitar = _contexto.Productos.Find(productoID);
+                if (productoDeshabilitar != null)
+                {
+                    _contexto.Productos.Remove(productoDeshabilitar);
+                    _contexto.SaveChanges();
+                    resultado = true;
+                }
+            }
+            else
+            {
+                resultado = false;
+                return Json(new { success = false, message = "La categoría no se puede eliminar porque tiene servicios asociados." });
             }
         }
         else
