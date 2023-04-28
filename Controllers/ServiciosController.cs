@@ -135,62 +135,62 @@ public class ServiciosController : Controller
     }
 
 
+    [Authorize]
+
+    public JsonResult DeshabilitarServicio(int servicioID)
+    {
+        bool resultado = true;
+        if (servicioID != 0)
+        {
+            //crear variable que guarde el objeto segun el id deseado
+            var servicioDeshabilitar = _contexto.Servicios.Find(servicioID);
+            if (servicioDeshabilitar != null)
+            {
+                servicioDeshabilitar.Eliminado = true;
+                _contexto.SaveChanges();
+                resultado = true;
+            }
+        }
+        else
+        {
+            resultado = false;
+        }
+        return Json(resultado);
+    }
+
+    [Authorize]
+
+    public JsonResult HabilitarServicio(int servicioID)
+    {
+        bool resultado = true;
+        if (servicioID != 0)
+        {
+            var servicioHabilitar = _contexto.Servicios.Find(servicioID);
+            if (servicioHabilitar != null)
+            {
+                servicioHabilitar.Eliminado = false;
+                _contexto.SaveChanges();
+                resultado = true;
+            }
+        }
+        else
+        {
+            resultado = false;
+        }
+        return Json(resultado);
+    }
+
     // [Authorize]
 
-    // public JsonResult DeshabilitarProducto(int productoID)
+    // public JsonResult EliminarServicio(int servicioID)
     // {
     //     bool resultado = true;
-    //     if (productoID != 0)
+    //     if (servicioID != 0)
     //     {
-    //         //crear variable que guarde el objeto segun el id deseado
-    //         var productoDeshabilitar = _contexto.Servicios.Find(productoID);
-    //         if (productoDeshabilitar != null)
+    //         var servicioDeshabilitar = _contexto.Servicios.Find(servicioID);
+    //         if (servicioDeshabilitar != null)
     //         {
-    //             productoDeshabilitar.Eliminado = true;
-    //             _contexto.SaveChanges();
-    //             resultado = true;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         resultado = false;
-    //     }
-    //     return Json(resultado);
-    // }
-
-    // [Authorize]
-
-    // public JsonResult HabilitarProducto(int productoID)
-    // {
-    //     bool resultado = true;
-    //     if (productoID != 0)
-    //     {
-    //         var productoHabilitar = _contexto.Servicios.Find(productoID);
-    //         if (productoHabilitar != null)
-    //         {
-    //             productoHabilitar.Eliminado = false;
-    //             _contexto.SaveChanges();
-    //             resultado = true;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         resultado = false;
-    //     }
-    //     return Json(resultado);
-    // }
-
-    // [Authorize]
-
-    // public JsonResult EliminarProducto(int productoID)
-    // {
-    //     bool resultado = true;
-    //     if (productoID != 0)
-    //     {
-    //         var productoDeshabilitar = _contexto.Servicios.Find(productoID);
-    //         if (productoDeshabilitar != null)
-    //         {
-    //             _contexto.Servicios.Remove(productoDeshabilitar);
+    //             _contexto.Servicios.Remove(servicioDeshabilitar);
     //             _contexto.SaveChanges();
     //             resultado = true;
     //         }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "a8p9YdR1lulNGcFAS6TobADG+Zt4PM70324v0PaUj2s=",
+  "Hash": "mKB1R23qXxqkOecjFIsuI6rHQbl14bAAwBSuwGOBpMQ=",
   "Source": "ProyectoX",
   "BasePath": "_content/ProyectoX",
   "Mode": "Default",
@@ -1103,6 +1103,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\Matias\\Documents\\ProyectoX\\wwwroot\\css\\unsplash.jpg",
+      "SourceId": "ProyectoX",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Matias\\Documents\\ProyectoX\\wwwroot\\",
+      "BasePath": "_content/ProyectoX",
+      "RelativePath": "css/unsplash.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\unsplash.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Matias\\Documents\\ProyectoX\\wwwroot\\css\\unsplash(2).jpg",
+      "SourceId": "ProyectoX",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Matias\\Documents\\ProyectoX\\wwwroot\\",
+      "BasePath": "_content/ProyectoX",
+      "RelativePath": "css/unsplash(2).jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\unsplash(2).jpg"
     },
     {
       "Identity": "C:\\Users\\Matias\\Documents\\ProyectoX\\wwwroot\\favicon.ico",
