@@ -180,25 +180,24 @@ public class ServiciosController : Controller
         return Json(resultado);
     }
 
-    // [Authorize]
-
-    // public JsonResult EliminarServicio(int servicioID)
-    // {
-    //     bool resultado = true;
-    //     if (servicioID != 0)
-    //     {
-    //         var servicioDeshabilitar = _contexto.Servicios.Find(servicioID);
-    //         if (servicioDeshabilitar != null)
-    //         {
-    //             _contexto.Servicios.Remove(servicioDeshabilitar);
-    //             _contexto.SaveChanges();
-    //             resultado = true;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         resultado = false;
-    //     }
-    //     return Json(resultado);
-    // }
+    [Authorize]
+    public JsonResult EliminarServicio(int servicioID)
+    {
+        bool resultado = true;
+        if (servicioID != 0)
+        {
+            var servicioDeshabilitar = _contexto.Servicios.Find(servicioID);
+            if (servicioDeshabilitar != null)
+            {
+                _contexto.Servicios.Remove(servicioDeshabilitar);
+                _contexto.SaveChanges();
+                resultado = true;
+            }
+        }
+        else
+        {
+            resultado = false;
+        }
+        return Json(resultado);
+    }
 }
