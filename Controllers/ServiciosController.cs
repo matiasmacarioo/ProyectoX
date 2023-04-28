@@ -118,7 +118,7 @@ public class ServiciosController : Controller
         List<VistaServicio> ServiciosMostrar = new List<VistaServicio>();
 
         // busca los servicios en productos habilitadas y las ordena por descripcion
-        var Servicios = _contexto.Servicios.Include(s => s.Producto).Where(s => s.Producto.Eliminado == false).OrderBy(p => p.Descripcion).ToList();
+        var Servicios = _contexto.Servicios.Include(s => s.Producto).Where(s => s.Producto.Eliminado == false && s.Producto.Categoria.Eliminado == false).OrderBy(p => p.Descripcion).ToList();
 
         if (ServicioID > 0)
         {
