@@ -58,21 +58,21 @@ function GuardarProducto(button) {
           BuscarProductos();
           break;
         case 1:
-          $("#DescripcionError").html(`<div class="alert fade_error .fade"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <strong>El nombre ya existe. Por favor ingrese un nombre único.</strong> </div>`);
+          $("#DescripcionError").html(`<div></div> <strong>El nombre ya existe. Por favor ingrese un nombre único.</strong> </div>`);
           break;
         case 2:
-          $("#DescripcionError").html(`<div class="alert fade_error .fade"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <strong>El nombre no puede estar vacío. Por favor ingrese un nombre válido.</strong> </div>`);
+          $("#DescripcionError").html(`<div></div> <strong>El nombre no puede estar vacío. Por favor ingrese un nombre válido.</strong> </div>`);
           break;
         case 3:
-          $("#DescripcionError").html(`<div class="alert fade_error .fade"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <strong>La categoría no puede estar vacía. Por favor seleccione una categoría válida.</strong> </div>`);
+          $("#CategoriaError").html(`<div></div> <strong>La categoría no puede estar vacía. Por favor seleccione una categoría válida.</strong> </div>`);
           break;
         default:
-          $("#DescripcionError").html(`<div class="alert fade_error .fade"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <strong>Ocurrió un error inesperado. Por favor inténtelo de nuevo más tarde.</strong> </div>`);
+          $("#DescripcionError").html(`<div>></div> <strong>Ocurrió un error inesperado. Por favor inténtelo de nuevo más tarde.</strong> </div>`);
           break;
       }
     })
     .fail(function () {
-      $("#DescripcionError").html(`<div class="alert fade_error .fade"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <strong>Primero debe iniciar sesión.</strong> </div>`);
+      $("#DescripcionError").html(`<div></div> <strong>Primero debe iniciar sesión.</strong> </div>`);
       $(button).html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
     });
 }

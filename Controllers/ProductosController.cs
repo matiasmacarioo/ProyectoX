@@ -95,7 +95,7 @@ public class ProductosController : Controller
                 // edita un producto ya creado
                 {
                     // comprueba que el nombre del producto sea diferente a otros en la misma categoría
-                    var productoOriginal = _contexto.Productos.Where(p => p.Descripcion == descripcion && p.CategoriaID == categoriaID).FirstOrDefault();
+                    var productoOriginal = _contexto.Productos.Where(p => p.Descripcion == descripcion && p.CategoriaID != categoriaID).FirstOrDefault();
                     if (productoOriginal == null)
                     {
                         var productoEditar = _contexto.Productos.Find(productoID);

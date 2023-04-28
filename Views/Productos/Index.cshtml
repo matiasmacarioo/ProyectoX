@@ -14,11 +14,11 @@
                 <input type="hidden" id="ProductoID" value="0" />
                 <div>
                     <label class="control-label text-light">Categoría</label>
-                    <select id="CategoriaID" class="form-control">
-                    </select>
+                    <select id="CategoriaID" class="form-control"></select>
+                    <div class="text-danger" id="CategoriaError"></div>
                 </div>
                 <div>
-                    <label class="control-label text-light">Nombre</label>
+                    <label class="control-label text-light">Nombre de Producto</label>
                     <input type="text" class="form-control" id="Descripcion" autocomplete="off" oninput="this.value = this.value.toUpperCase()" style="text-transform: uppercase;"/>
                     <div class="text-danger" id="DescripcionError"></div>
                 </div>
