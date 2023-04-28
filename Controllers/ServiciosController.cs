@@ -44,7 +44,7 @@ public class ServiciosController : Controller
                         if (servicioID == 0)
                         {
                             // Comprueba si no existe otro con la misma descripcion
-                            var servicioOriginal = _contexto.Servicios.Where(p => p.Descripcion == descripcion && p.ProductoID == productoID).FirstOrDefault();
+                            var servicioOriginal = _contexto.Servicios.Where(p => p.Descripcion == descripcion && p.ServicioID != servicioID).FirstOrDefault();
                             // si no hay uno igual procede a crear un nuevo servicio
                             if (servicioOriginal == null)
                             {
@@ -68,7 +68,7 @@ public class ServiciosController : Controller
                         // edita un servicio ya creado ya que el id no es 0
                         {
                             // comprueba que el nombre del servicio sea diferente a otros en la misma categoría
-                            var servicioOriginal = _contexto.Servicios.Where(p => p.Descripcion == descripcion && p.ProductoID != productoID).FirstOrDefault();
+                            var servicioOriginal = _contexto.Servicios.Where(p => p.Descripcion == descripcion && p.ServicioID != servicioID).FirstOrDefault();
                             if (servicioOriginal == null)
                             {
                                 var servicioEditar = _contexto.Servicios.Find(servicioID);

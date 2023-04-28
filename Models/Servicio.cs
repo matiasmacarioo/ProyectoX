@@ -11,6 +11,7 @@ public class Servicio
     [Required]
     public string? Direccion { get; set; }
     [Required]
+    [RegularExpression(@"^\d{10}$")]
     public string? Telefono { get; set; }
     public bool Eliminado { get; set; }
     public int ProductoID { get; set; }

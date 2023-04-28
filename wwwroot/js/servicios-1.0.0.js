@@ -101,6 +101,10 @@ function EditarServicio(servicioID) {
         $("#Telefono").val(servicio.telefono);
         $("#ServicioID").val(servicio.servicioID);
         $("#ProductoID").val(servicio.productoID);
+        document.getElementById("ProductoError").textContent = "";
+        document.getElementById("DescripcionError").textContent = "";
+        document.getElementById("DireccionError").textContent = "";
+        document.getElementById("TelefonoError").textContent = "";
         LlenarProductos(); // call the function to fill the categories dropdown
 
         // Change modal title based on the button
@@ -137,11 +141,15 @@ function VaciarFormulario() {
   var title = $('#exampleModalLabel');
   title.text('Agregar Servicio');
 
+  $("#ServicioID").val(0);
+  $("#ProductoID").val(0);
   $("#Descripcion").val('');
   $("#Direccion").val('');
   $("#Telefono").val('');
-  $("#ProductoID").val(0);
-  $("#ServicioID").val(0);
+  document.getElementById("ProductoError").textContent = "";
+  document.getElementById("DescripcionError").textContent = "";
+  document.getElementById("DireccionError").textContent = "";
+  document.getElementById("TelefonoError").textContent = "";
 }
 
 function DeshabilitarServicio(servicioID, button) {
