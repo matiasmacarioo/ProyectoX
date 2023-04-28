@@ -219,9 +219,9 @@ telefonoInput.addEventListener("input", function (event) {
 
   if (!telefonoValido.test(telefono)) {
     document.getElementById("TelefonoError").textContent = "Introduce un número de teléfono válido (10 dígitos).";
-    telefonoInput.setCustomValidity("Introduce un número de teléfono válido (10 dígitos).");
+    // telefonoInput.setCustomValidity("Introduce un número de teléfono válido (10 dígitos).");
   } else {
     document.getElementById("TelefonoError").textContent = "";
-    telefonoInput.setCustomValidity("");
+    // telefonoInput.setCustomValidity("");
   }
 });
