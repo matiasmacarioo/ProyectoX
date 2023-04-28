@@ -33,54 +33,69 @@ public class ServiciosController : Controller
         if (productoID != 0)
         {
             // comprueba que la descripcion recibida no este vacia.
-            if (!string.IsNullOrEmpty(descripcion) & !string.IsNullOrEmpty(direccion) & !string.IsNullOrEmpty(telefono))
+            if (!string.IsNullOrEmpty(descripcion))
             {
-                // crea un nuevo servicio si su id es 0
-                if (servicioID == 0)
+                if (!string.IsNullOrEmpty(direccion))
                 {
-                    // Comprueba si no existe otro con la misma descripcion
-                    var servicioOriginal = _contexto.Servicios.Where(p => p.Descripcion == descripcion && p.ProductoID == productoID).FirstOrDefault();
-                    // si no hay uno igual procede a crear un nuevo servicio
-                    if (servicioOriginal == null)
+                    if (!string.IsNullOrEmpty(telefono))
                     {
-                        var servicioGuardar = new Servicio
+
+                        // crea un nuevo servicio si su id es 0
+                        if (servicioID == 0)
                         {
-                            Descripcion = descripcion,
-                            Direccion = direccion,
-                            Telefono = telefono,
-                            ProductoID = productoID
-                        };
-                        _contexto.Add(servicioGuardar);
-                        _contexto.SaveChanges();
-                        resultado = 0;
-                    }
-                    else
-                    {
-                        resultado = 1;
-                    }
-                }
-                else
-                // edita un servicio ya creado ya que el id no es 0
-                {
-                    // comprueba que el nombre del servicio sea diferente a otros en la misma categoría
-                    var servicioOriginal = _contexto.Servicios.Where(p => p.Descripcion == descripcion && p.ProductoID != productoID).FirstOrDefault();
-                    if (servicioOriginal == null)
-                    {
-                        var servicioEditar = _contexto.Servicios.Find(servicioID);
-                        if (servicioEditar != null)
+                            // Comprueba si no existe otro con la misma descripcion
+                            var servicioOriginal = _contexto.Servicios.Where(p => p.Descripcion == descripcion && p.ProductoID == productoID).FirstOrDefault();
+                            // si no hay uno igual procede a crear un nuevo servicio
+                            if (servicioOriginal == null)
+                            {
+                                var servicioGuardar = new Servicio
+                                {
+                                    Descripcion = descripcion,
+                                    Direccion = direccion,
+                                    Telefono = telefono,
+                                    ProductoID = productoID
+                                };
+                                _contexto.Add(servicioGuardar);
+                                _contexto.SaveChanges();
+                                resultado = 0;
+                            }
+                            else
+                            {
+                                resultado = 1;
+                            }
+                        }
+                        else
+                        // edita un servicio ya creado ya que el id no es 0
                         {
-                            servicioEditar.Descripcion = descripcion;
-                            servicioEditar.Direccion = direccion;
-                            servicioEditar.Telefono = telefono;
-                            servicioEditar.ProductoID = productoID;
-                            _contexto.SaveChanges();
-                            resultado = 0;
+                            // comprueba que el nombre del servicio sea diferente a otros en la misma categoría
+                            var servicioOriginal = _contexto.Servicios.Where(p => p.Descripcion == descripcion && p.ProductoID != productoID).FirstOrDefault();
+                            if (servicioOriginal == null)
+                            {
+                                var servicioEditar = _contexto.Servicios.Find(servicioID);
+                                if (servicioEditar != null)
+                                {
+                                    servicioEditar.Descripcion = descripcion;
+                                    servicioEditar.Direccion = direccion;
+                                    servicioEditar.Telefono = telefono;
+                                    servicioEditar.ProductoID = productoID;
+                                    _contexto.SaveChanges();
+                                    resultado = 0;
+                                }
+                            }
+                            else
+                            {
+                                resultado = 1;
+                            }
                         }
                     }
                     else
                     {
-                        resultado = 1;
+                        resultado = 5;
                     }
+                }
+                else
+                {
+                    resultado = 4;
                 }
             }
             else

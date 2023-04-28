@@ -4,10 +4,10 @@ function BuscarServicios() {
   $.ajax({
     url: '/Servicios/BuscarServicios',
     method: 'GET',
-    success: function(data) {
+    success: function (data) {
       // console.log(data); // Log the retrieved products to the console
       let tbodyServicios = $('#tbody-servicios').empty();
-      $.each(data, function(index, servicio) {
+      $.each(data, function (index, servicio) {
         let acciones = `
           <button class="btn btn-dark btn-sm editar" onClick="EditarServicio(${servicio.servicioID}, 'editar', this)">Editar</button>
           <button class="btn btn-dark btn-sm" onClick="EliminarServicio(${servicio.servicioID}, this)">X</button>
@@ -29,9 +29,9 @@ function BuscarServicios() {
         `);
       });
       // función de busqueda
-      $('#busqueda').on('keyup', function() {
+      $('#busqueda').on('keyup', function () {
         var value = $(this).val().toLowerCase();
-        $('#tbody-servicios tr').each(function() {
+        $('#tbody-servicios tr').each(function () {
           var rowText = $(this).find('td:first-child').text().toLowerCase();
           if (rowText.indexOf(value) !== -1) {
             $(this).show();
@@ -41,7 +41,7 @@ function BuscarServicios() {
         });
       });
     },
-    error: function(jqXHR, textStatus, errorThrown) {
+    error: function (jqXHR, textStatus, errorThrown) {
       console.log('Error al cargar servicios:', textStatus, errorThrown); // Log any errors to the console
     }
   });
@@ -54,9 +54,9 @@ function GuardarServicio(button) {
   let direccion = $("#Direccion").val();
   let telefono = $("#Telefono").val();
 
-  $.post('../../Servicios/GuardarServicio', { servicioID, productoID, descripcion, direccion, telefono})
+  $.post('../../Servicios/GuardarServicio', { servicioID, productoID, descripcion, direccion, telefono })
     .done(function (resultado) {
-      switch(resultado) {
+      switch (resultado) {
         case 0:
           $("#ModalServicio").modal("hide");
           BuscarServicios();
@@ -69,6 +69,12 @@ function GuardarServicio(button) {
           break;
         case 3:
           $("#ProductoError").html(`<div><strong>El producto no puede estar vacío. Por favor seleccione un producto válido.</strong> </div>`);
+          break;
+        case 4:
+          $("#DireccionError").html(`<div><strong>La direccion no puede estar vacía. Por favor ingrese una dirección válida.</strong> </div>`);
+          break;
+        case 5:
+          $("#TelefonoError").html(`<div><strong>El telefono no puede estar vacío. Por favor ingrese un telefono válido.</strong> </div>`);
           break;
         default:
           $("#DescripcionError").html(`<div><strong>Ocurrió un error inesperado. Por favor inténtelo de nuevo más tarde.</strong> </div>`);
@@ -96,7 +102,7 @@ function EditarServicio(servicioID) {
         $("#ServicioID").val(servicio.servicioID);
         $("#ProductoID").val(servicio.productoID);
         LlenarProductos(); // call the function to fill the categories dropdown
-        
+
         // Change modal title based on the button
         if (modo === 'editar') {
           title.text('Editar Servicio');
@@ -120,7 +126,7 @@ function LlenarProductos() {
     selectProductos.append('<option value="0" selected>Seleccione un producto</option>');
     $.each(productos, function (index, producto) {
       $('#ProductoID').append($('<option></option>').val(producto.productoID).text(producto.descripcion));
-    });      
+    });
   }).fail(function () {
     alert('Error al cargar productos');
   });
@@ -162,9 +168,9 @@ function HabilitarServicio(servicioID, button) {
 function EliminarServicio(servicioID) {
   // Show confirmation modal
   $('#confirm-delete-modal').modal('show');
-  
+
   // Add event listener to delete button in modal
-  $('#confirm-delete-btn').click(function() {
+  $('#confirm-delete-btn').click(function () {
     // Send post request to server to delete the category
     $.post('../../Servicios/EliminarServicio', { servicioID: parseInt(servicioID) })
       .done(function (resultado) {
@@ -185,7 +191,7 @@ function EliminarServicio(servicioID) {
   });
 
   // Add event listener to modal hidden event
-  $('#confirm-delete-modal').on('hidden.bs.modal', function() {
+  $('#confirm-delete-modal').on('hidden.bs.modal', function () {
     // Reset modal content to default
     $('#confirm-delete-modal .modal-body').html('<p>¿Está seguro que desea eliminar este servicio?</p>');
   });
@@ -199,11 +205,11 @@ $('#ModalServicio').on('shown.bs.modal', function () {
 
 
 var telefonoInput = document.getElementById("Telefono");
-telefonoInput.addEventListener("input", function(event) {
+telefonoInput.addEventListener("input", function (event) {
   var telefono = event.target.value;
-  var telefonoRegex = /^\d{10}$/; // Expresión regular para números de teléfono de 10 dígitos
-  
-  if (!telefonoRegex.test(telefono)) {
+  var telefonoValido = /^\d{10}$/; // Expresión regular para números de teléfono de 10 dígitos
+
+  if (!telefonoValido.test(telefono)) {
     document.getElementById("TelefonoError").textContent = "Introduce un número de teléfono válido (10 dígitos).";
     telefonoInput.setCustomValidity("Introduce un número de teléfono válido (10 dígitos).");
   } else {
