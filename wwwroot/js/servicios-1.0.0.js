@@ -82,7 +82,7 @@ function GuardarServicio(button) {
       }
     })
     .fail(function () {
-      $("#DescripcionError").html(`<div"><strong>Primero debe iniciar sesión.</strong> </div>`);
+      $("#TelefonoError").html(`<div"><strong>Primero debe iniciar sesión.</strong> </div>`);
       $(button).html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
     });
 }
