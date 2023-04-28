@@ -91,6 +91,8 @@ function EditarServicio(servicioID) {
       if (servicios.length == 1) {
         let servicio = servicios[0];
         $("#Descripcion").val(servicio.descripcion);
+        $("#Direccion").val(servicio.direccion);
+        $("#Telefono").val(servicio.telefono);
         $("#ServicioID").val(servicio.servicioID);
         $("#ProductoID").val(servicio.productoID);
         LlenarProductos(); // call the function to fill the categories dropdown
@@ -125,11 +127,13 @@ function LlenarProductos() {
 }
 
 function VaciarFormulario() {
-  var modal = $('#ModalProducto');
+  var modal = $('#ModalServicio');
   var title = $('#exampleModalLabel');
   title.text('Agregar Servicio');
 
   $("#Descripcion").val('');
+  $("#Direccion").val('');
+  $("#Telefono").val('');
   $("#ProductoID").val(0);
   $("#ServicioID").val(0);
 }
@@ -142,8 +146,6 @@ function DeshabilitarServicio(servicioID, button) {
     })
     .fail(function (xhr, status) {
       $(button).html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
-      // alert('Primero debe iniciar sesión.');
-      // $(button).text('Inicia sesión');
     });
 }
 
