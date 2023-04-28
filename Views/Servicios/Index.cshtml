@@ -14,8 +14,8 @@
                 <input type="hidden" id="ServicioID" value="0" />
                 <div>
                     <label class="control-label text-light">Producto</label>
-                    <select id="ProductoID" class="form-control">
-                    </select>
+                    <select id="ProductoID" class="form-control"></select>
+                    <div class="text-danger" id="ProductoError"></div>
                 </div>
                 <div>
                     <label class="control-label text-light">Nombre</label>
@@ -29,7 +29,7 @@
                 </div>
                 <div>
                     <label class="control-label text-light">Teléfono</label>
-                    <input type="tel" class="form-control" id="Telefono" autocomplete="off" oninput="this.value = this.value.toUpperCase()" style="text-transform: uppercase;"/>
+                    <input type="tel" class="form-control" id="Telefono" autocomplete="off"/>
                     <div class="text-danger" id="TelefonoError"></div>
                 </div>
             </div>

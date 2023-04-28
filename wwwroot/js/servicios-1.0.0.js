@@ -62,21 +62,21 @@ function GuardarServicio(button) {
           BuscarServicios();
           break;
         case 1:
-          $("#DescripcionError").html(`<div class="alert fade_error .fade"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <strong>El nombre ya existe. Por favor ingrese un nombre único.</strong> </div>`);
+          $("#DescripcionError").html(`<div><strong>El nombre ya existe. Por favor ingrese un nombre único.</strong> </div>`);
           break;
         case 2:
-          $("#DescripcionError").html(`<div class="alert fade_error .fade"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <strong>El nombre no puede estar vacío. Por favor ingrese un nombre válido.</strong> </div>`);
+          $("#DescripcionError").html(`<div><strong>El nombre no puede estar vacío. Por favor ingrese un nombre válido.</strong> </div>`);
           break;
         case 3:
-          $("#DescripcionError").html(`<div class="alert fade_error .fade"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <strong>El producto no puede estar vacío. Por favor seleccione un producto válido.</strong> </div>`);
+          $("#ProductoError").html(`<div><strong>El producto no puede estar vacío. Por favor seleccione un producto válido.</strong> </div>`);
           break;
         default:
-          $("#DescripcionError").html(`<div class="alert fade_error .fade"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <strong>Ocurrió un error inesperado. Por favor inténtelo de nuevo más tarde.</strong> </div>`);
+          $("#DescripcionError").html(`<div><strong>Ocurrió un error inesperado. Por favor inténtelo de nuevo más tarde.</strong> </div>`);
           break;
       }
     })
     .fail(function () {
-      $("#DescripcionError").html(`<div class="alert fade_error .fade"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button> <strong>Primero debe iniciar sesión.</strong> </div>`);
+      $("#DescripcionError").html(`<div"><strong>Primero debe iniciar sesión.</strong> </div>`);
       $(button).html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
     });
 }
@@ -195,4 +195,19 @@ function EliminarServicio(servicioID) {
 
 $('#ModalServicio').on('shown.bs.modal', function () {
   $('#Descripcion').focus();
+});
+
+
+var telefonoInput = document.getElementById("Telefono");
+telefonoInput.addEventListener("input", function(event) {
+  var telefono = event.target.value;
+  var telefonoRegex = /^\d{10}$/; // Expresión regular para números de teléfono de 10 dígitos
+  
+  if (!telefonoRegex.test(telefono)) {
+    document.getElementById("TelefonoError").textContent = "Introduce un número de teléfono válido (10 dígitos).";
+    telefonoInput.setCustomValidity("Introduce un número de teléfono válido (10 dígitos).");
+  } else {
+    document.getElementById("TelefonoError").textContent = "";
+    telefonoInput.setCustomValidity("");
+  }
 });
