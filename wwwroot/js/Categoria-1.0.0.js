@@ -48,7 +48,7 @@ function BuscarCategorias() {
         botonDeshabilitar = `<button class="btn btn-dark btn-sm deshabilitar" onclick="DeshabilitarCategoria('${categoria.categoriaID}', this)">Deshabilitar</button>`;
       }
       tbodyCategorias.append(`
-          <tr>
+          <tr class="text-center">
             <td class="text-light">${categoria.descripcion}</td>
             <td class="text-light text-center btn-group">
               <button class="btn btn-dark btn-sm editar" onClick="BuscarCategoria(${categoria.categoriaID}, 'editar')">Editar</button>
