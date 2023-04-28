@@ -19,11 +19,11 @@ function BuscarServicios() {
           botonDeshabilitar = `<button class="btn btn-dark btn-sm deshabilitar" onclick="DeshabilitarServicio('${servicio.servicioID}', this)">Deshabilitar</button>`;
         }
         tbodyServicios.append(`
-          <tr>
+          <tr class="text-center">
             <td class="text-light">${servicio.descripcion}</td>
+            <td class="text-light">${servicio.productoDescripcion}</td>
             <td class="text-light">${servicio.direccion}</td>
             <td class="text-light">${servicio.telefono}</td>
-            <td class="text-light">${servicio.productoDescripcion}</td>
             <td class="text-light text-center btn-group">${acciones} ${botonDeshabilitar}</td>
           </tr>
         `);

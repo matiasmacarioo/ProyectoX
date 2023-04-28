@@ -25,6 +25,7 @@ public class VistaServicio {
     public string? Telefono { get; set; }
     public bool Eliminado { get; set; }
     public int ProductoID { get; set; }
+    public string? ProductoDescripcion { get; set; }
     public virtual Producto? Producto { get; set; }
 }
 

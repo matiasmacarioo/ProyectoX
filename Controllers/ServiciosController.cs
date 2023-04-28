@@ -98,33 +98,35 @@ public class ServiciosController : Controller
     }
 
 
-    // public JsonResult BuscarServicios(int ProductoID = 0)
-    // {
-    //     List<VistaProducto> ServiciosMostrar = new List<VistaProducto>();
+    public JsonResult BuscarServicios(int ServicioID = 0)
+    {
+        List<VistaServicio> ServiciosMostrar = new List<VistaServicio>();
 
-    //     // busca los servicios en categorias habilitadas y las ordena por descripcion
-    //     var Servicios = _contexto.Servicios.Include(p => p.Categoria).Where(p => p.Categoria.Eliminado == false).OrderBy(p => p.Descripcion).ToList();
+        // busca los servicios en productos habilitadas y las ordena por descripcion
+        var Servicios = _contexto.Servicios.Include(s => s.Producto).Where(s => s.Producto.Eliminado == false).OrderBy(p => p.Descripcion).ToList();
 
-    //     if (ProductoID > 0)
-    //     {
-    //         Servicios = Servicios.Where(p => p.ProductoID == ProductoID).OrderBy(p => p.Descripcion).ToList();
-    //     }
-    //     foreach (var Producto in Servicios)
-    //     {
-    //         var ProductoMostrar = new VistaProducto
-    //         {
-    //             Descripcion = Producto.Descripcion,
-    //             ProductoID = Producto.ProductoID,
-    //             CategoriaID = Producto.CategoriaID,
-    //             CategoriaDescripcion = Producto.Categoria.Descripcion,
-    //             Eliminado = Producto.Eliminado
+        if (ServicioID > 0)
+        {
+            Servicios = Servicios.Where(s => s.ServicioID == ServicioID).OrderBy(s => s.Descripcion).ToList();
+        }
+        foreach (var Servicio in Servicios)
+        {
+            var ServicioMostrar = new VistaServicio
+            {
+                ServicioID = Servicio.ServicioID,
+                Descripcion = Servicio.Descripcion,
+                Direccion = Servicio.Direccion,
+                Telefono = Servicio.Telefono,
+                Eliminado = Servicio.Eliminado,
+                ProductoID = Servicio.ProductoID,
+                ProductoDescripcion = Servicio.Producto.Descripcion
 
-    //         };
-    //         ServiciosMostrar.Add(ProductoMostrar);
-    //     }
+            };
+            ServiciosMostrar.Add(ServicioMostrar);
+        }
 
-    //     return Json(ServiciosMostrar);
-    // }
+        return Json(ServiciosMostrar);
+    }
 
     public JsonResult BuscarProductos()
     {

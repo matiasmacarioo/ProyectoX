@@ -19,10 +19,10 @@ function BuscarProductos() {
           botonDeshabilitar = `<button class="btn btn-dark btn-sm deshabilitar" onclick="DeshabilitarProducto('${producto.productoID}', this)">Deshabilitar</button>`;
         }
         tbodyProductos.append(`
-          <tr>
-            <td class="text-light">${producto.descripcion}</td>
-            <td class="text-light">${producto.categoriaDescripcion}</td>
-            <td class="text-light text-center btn-group">${acciones} ${botonDeshabilitar}</td>
+          <tr class="text-light text-center">
+            <td>${producto.descripcion}</td>
+            <td>${producto.categoriaDescripcion}</td>
+            <td class="btn-group">${acciones} ${botonDeshabilitar}</td>
           </tr>
         `);
       });
