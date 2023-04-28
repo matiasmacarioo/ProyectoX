@@ -19,7 +19,7 @@ body {
 }
 
 body{
-  background: url(photo.jpg);
+  /* background: url(1.jpg); */
   background-color: rgb(36, 36, 36);
   background-size: cover;
 }
@@ -36,8 +36,8 @@ a {
 
 .card {
   background-color: #ffffff13;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   padding: 20px;
   margin: auto;
@@ -52,8 +52,9 @@ a {
 .card:hover {
   background-color: #ffffff1c;
   filter: saturate(1.4);
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: background-color 0.3s ease-in-out;
 }
 
 
