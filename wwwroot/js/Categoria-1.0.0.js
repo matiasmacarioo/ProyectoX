@@ -138,17 +138,24 @@ function EliminarCategoria(categoriaID) {
     $.post('../../Categorias/EliminarCategoria', { categoriaID: parseInt(categoriaID) })
       .done(function (resultado) {
         if (resultado.success) {
-          // Fade out the row before removing it from the table
-          $('#tbody-categorias tr').filter(`[data-id='${categoriaID}']`).fadeOut('slow', function () {
-            $(this).remove();
-          });
           // Display success message inside modal
           $('#confirm-delete-modal .modal-body').html('<p class="text-success">La categoría se ha eliminado correctamente.</p>');
-          // Refresh the list of categories after a short delay
+
+          // Wait for 1 second before closing the modal
           setTimeout(function () {
-            BuscarCategorias();
+            // Hide the modal
             $('#confirm-delete-modal').modal('hide');
-          }, 650);
+
+            // Fade out the row before removing it from the table
+            $('#tbody-categorias tr').filter(`[data-id='${categoriaID}']`).fadeOut('slow', function () {
+              $(this).remove();
+            });
+
+            // Wait for another 1 second before refreshing the list of categories
+            setTimeout(function () {
+              BuscarCategorias();
+            }, 1000);
+          }, 850);
         } else {
           // Display error message inside modal
           $('#confirm-delete-modal .modal-body').html('<p class="text-danger">' + resultado.message + '</p>');
@@ -165,8 +172,9 @@ function EliminarCategoria(categoriaID) {
     // Reset modal content to default
     $('#confirm-delete-modal .modal-body').html('<p>¿Está seguro que desea eliminar este producto?</p>');
   });
-
 }
+
+
 
 // esta función limpia los campos del modal.
 function VaciarFormulario() {
@@ -176,6 +184,7 @@ function VaciarFormulario() {
   // Clear form fields
   $("#Descripcion").val('');
   $("#CategoriaID").val(0);
+  document.getElementById("DescripcionError").textContent = "";
 }
 
 $('#ModalCategoria').on('shown.bs.modal', function () {
