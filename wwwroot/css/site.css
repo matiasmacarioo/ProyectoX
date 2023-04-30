@@ -19,7 +19,7 @@ body {
 }
 
 body{
-  /* background: url(1.jpg); */
+  background: url(1.jpg);
   background-color: rgb(36, 36, 36);
   background-size: cover;
 }
