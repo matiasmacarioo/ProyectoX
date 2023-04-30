@@ -48,15 +48,16 @@ function BuscarCategorias() {
         botonDeshabilitar = `<button class="btn btn-dark btn-sm deshabilitar" onclick="DeshabilitarCategoria('${categoria.categoriaID}', this)">Deshabilitar</button>`;
       }
       tbodyCategorias.append(`
-          <tr class="text-center">
-            <td class="text-light">${categoria.descripcion}</td>
-            <td class="text-light text-center btn-group">
-              <button class="btn btn-dark btn-sm editar" onClick="BuscarCategoria(${categoria.categoriaID}, 'editar')">Editar</button>
-              <button class="btn btn-dark btn-sm" onClick="EliminarCategoria(${categoria.categoriaID})">X</button>
-              ${botonDeshabilitar}
-            </td>
-          </tr>
-        `);
+  <tr class="text-center" data-id="${categoria.categoriaID}">
+    <td class="text-light">${categoria.descripcion}</td>
+    <td class="text-light text-center btn-group">
+      <button class="btn btn-dark btn-sm editar" onClick="BuscarCategoria(${categoria.categoriaID}, 'editar')">Editar</button>
+      <button class="btn btn-dark btn-sm" onClick="EliminarCategoria(${categoria.categoriaID})">X</button>
+      ${botonDeshabilitar}
+    </td>
+  </tr>
+`);
+
     });
 
     // función de busqueda
@@ -137,6 +138,10 @@ function EliminarCategoria(categoriaID) {
     $.post('../../Categorias/EliminarCategoria', { categoriaID: parseInt(categoriaID) })
       .done(function (resultado) {
         if (resultado.success) {
+          // Fade out the row before removing it from the table
+          $('#tbody-categorias tr').filter(`[data-id='${categoriaID}']`).fadeOut('slow', function () {
+            $(this).remove();
+          });
           // Display success message inside modal
           $('#confirm-delete-modal .modal-body').html('<p class="text-success">La categoría se ha eliminado correctamente.</p>');
           // Refresh the list of categories after a short delay
@@ -155,11 +160,11 @@ function EliminarCategoria(categoriaID) {
       });
   });
 
-    // Add event listener to modal hidden event
-    $('#confirm-delete-modal').on('hidden.bs.modal', function() {
-      // Reset modal content to default
-      $('#confirm-delete-modal .modal-body').html('<p>¿Está seguro que desea eliminar este producto?</p>');
-    });
+  // Add event listener to modal hidden event
+  $('#confirm-delete-modal').on('hidden.bs.modal', function () {
+    // Reset modal content to default
+    $('#confirm-delete-modal .modal-body').html('<p>¿Está seguro que desea eliminar este producto?</p>');
+  });
 
 }
 
