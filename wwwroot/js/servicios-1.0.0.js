@@ -19,7 +19,7 @@ function BuscarServicios() {
           botonDeshabilitar = `<button class="btn btn-dark btn-sm deshabilitar" onclick="DeshabilitarServicio('${servicio.servicioID}', this)">Deshabilitar</button>`;
         }
         tbodyServicios.append(`
-          <tr class="text-center">
+          <tr data-id="${servicio.servicioID}" class="text-center">
             <td class="text-light">${servicio.descripcion}</td>
             <td class="text-light">${servicio.productoDescripcion}</td>
             <td class="text-light">${servicio.direccion}</td>
@@ -189,10 +189,21 @@ function EliminarServicio(servicioID) {
       .done(function (resultado) {
         if (resultado) {
           $('#confirm-delete-modal .modal-body').html('<p class="text-success">El servicio se ha eliminado.</p>');
+          // Wait for 1 second before closing the modal
           setTimeout(function () {
-            BuscarServicios();
+            // Hide the modal
             $('#confirm-delete-modal').modal('hide');
-          }, 650);
+
+            // Fade out the row before removing it from the table
+            $('#tbody-servicios tr').filter(`[data-id='${servicioID}']`).fadeOut('slow', function () {
+              $(this).remove();
+            });
+
+            // Wait for another 1 second before refreshing the list of categories
+            setTimeout(function () {
+              BuscarServicios();
+            }, 1000);
+          }, 850);
         } else {
           $('#confirm-delete-modal .modal-body').html('<p class="text-danger">No se pudo eliminar el servicio.</p>');
         }
