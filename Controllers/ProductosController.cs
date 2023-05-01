@@ -182,10 +182,10 @@ public class ProductosController : Controller
             if (serviciosEnProducto.Count == 0)
             {
 
-                var productoDeshabilitar = _contexto.Productos.Find(productoID);
-                if (productoDeshabilitar != null)
+                var productoEliminar = _contexto.Productos.Find(productoID);
+                if (productoEliminar != null)
                 {
-                    _contexto.Productos.Remove(productoDeshabilitar);
+                    _contexto.Productos.Remove(productoEliminar);
                     _contexto.SaveChanges();
                     resultado = true;
                 }

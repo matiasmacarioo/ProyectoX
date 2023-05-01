@@ -19,7 +19,7 @@ function BuscarProductos() {
           botonDeshabilitar = `<button class="btn btn-dark btn-sm deshabilitar" onclick="DeshabilitarProducto('${producto.productoID}', this)">Deshabilitar</button>`;
         }
         tbodyProductos.append(`
-          <tr class="text-light text-center">
+          <tr class="text-light text-center" data-id="${producto.productoID}">
             <td>${producto.descripcion}</td>
             <td>${producto.categoriaDescripcion}</td>
             <td class="btn-group">${acciones} ${botonDeshabilitar}</td>
@@ -167,12 +167,24 @@ function EliminarProducto(productoID) {
     // Send post request to server to delete the category
     $.post('../../Productos/EliminarProducto', { productoID: parseInt(productoID) })
       .done(function (resultado) {
-        if (resultado.success) {
+        console.log(resultado);
+        if (resultado) {
           $('#confirm-delete-modal .modal-body').html('<p class="text-success">El producto se ha eliminado.</p>');
+          // Wait for 1 second before closing the modal
           setTimeout(function () {
-            BuscarProductos();
+            // Hide the modal
             $('#confirm-delete-modal').modal('hide');
-          }, 650);
+
+            // Fade out the row before removing it from the table
+            $('#tbody-productos tr').filter(`[data-id='${productoID}']`).fadeOut('slow', function () {
+              $(this).remove();
+            });
+
+            // Wait for another 1 second before refreshing the list of categories
+            setTimeout(function () {
+              BuscarProductos();
+            }, 1000);
+          }, 850);
         } else {
           // Display error message inside modal
           $('#confirm-delete-modal .modal-body').html('<p class="text-danger">' + resultado.message + '</p>');
@@ -183,14 +195,13 @@ function EliminarProducto(productoID) {
         $('#confirm-delete-btn').html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
       });
   });
-
-  // Add event listener to modal hidden event
-  $('#confirm-delete-modal').on('hidden.bs.modal', function() {
-    // Reset modal content to default
-    $('#confirm-delete-modal .modal-body').html('<p>¿Está seguro que desea eliminar esta categoria?</p>');
-  });
-
 }
+
+// Add event listener to modal hidden event
+$('#confirm-delete-modal').on('hidden.bs.modal', function() {
+  // Reset modal content to default
+  $('#confirm-delete-modal .modal-body').html('<p>¿Está seguro que desea eliminar esta categoria?</p>');
+});
 
 
 $('#ModalProducto').on('shown.bs.modal', function () {
