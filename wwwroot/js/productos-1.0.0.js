@@ -133,6 +133,9 @@ function VaciarFormulario() {
   $("#Descripcion").val('');
   $("#CategoriaID").val(0);
   $("#ProductoID").val(0);
+  document.getElementById("DescripcionError").textContent = "";
+  document.getElementById("CategoriaError").textContent = "";
+
 }
 
 function DeshabilitarProducto(productoID, button) {
@@ -195,13 +198,15 @@ function EliminarProducto(productoID) {
         $('#confirm-delete-btn').html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
       });
   });
-}
 
-// Add event listener to modal hidden event
+  // Add event listener to modal hidden event
 $('#confirm-delete-modal').on('hidden.bs.modal', function() {
   // Reset modal content to default
   $('#confirm-delete-modal .modal-body').html('<p>¿Está seguro que desea eliminar esta categoria?</p>');
 });
+}
+
+
 
 
 $('#ModalProducto').on('shown.bs.modal', function () {
