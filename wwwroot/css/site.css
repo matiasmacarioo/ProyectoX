@@ -29,8 +29,7 @@ a {
 
 .card {
   border-radius: 15px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   padding: 30px 50px 30px 30px;
   margin-bottom: 2rem;
@@ -41,9 +40,8 @@ a {
 
 .card:hover {
   background-color: #ffffff15;
-  filter: saturate(1.4);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  filter: saturate(1.15);
+  backdrop-filter: blur(30px);
   transition: background-color 0.3s ease-in-out;
 }
 
