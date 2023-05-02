@@ -32,16 +32,15 @@ a {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  padding: 20px 30px 50px 30px;
-  margin: auto;
-  margin-top: 50px;
+  padding: 30px 50px 30px 30px;
+  margin-bottom: 2rem;
   text-align: center;
   position: relative;
   transition: background-color 0.3s ease-in-out;
 }
 
 .card:hover {
-  background-color: #ffffff1c;
+  background-color: #ffffff15;
   filter: saturate(1.4);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
