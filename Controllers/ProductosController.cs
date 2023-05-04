@@ -206,7 +206,6 @@ public class ProductosController : Controller
     [Authorize]
     public JsonResult EliminarProducto(int productoID)
     {
-        bool resultado = true;
         if (productoID != 0)
         {
             // obtiene los servicios asociados al producto
@@ -219,22 +218,19 @@ public class ProductosController : Controller
                 {
                     _contexto.Productos.Remove(productoEliminar);
                     _contexto.SaveChanges();
-                    resultado = true;
+                    return Json(new { success = true, message = "El producto se ha eliminado." });
                 }
             }
             else
             {
-                resultado = false;
                 // devuelve un mensaje de error si hay servicios asociados al producto
                 return Json(new { success = false, message = "La categoría no se puede eliminar porque tiene servicios asociados." });
             }
         }
-        else
-        {
-            resultado = false;
-        }
-        // devuelve el resultado de la operación
-        return Json(resultado);
+
+        // devuelve un mensaje de error si el producto no existe o el id es 0
+        return Json(new { success = false, message = "No se pudo eliminar el producto." });
     }
+
 
 }

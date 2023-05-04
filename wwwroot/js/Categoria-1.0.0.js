@@ -77,11 +77,11 @@ function BuscarCategorias() {
   });
 }
 
-// esta función recibe un ID de categoría como argumento y realiza una llamada AJAX para obtener la información de esa categoría desde el servidor y mostrarla en un formulario en la página.
+// esta función recibe un ID de categoría como argumento y realiza una llamada AJAX para obtener la información de esa categoría desde el servidor y mostrarla en un formulario en la tabla de categorias.
 function BuscarCategoria(categoriaID) {
   var modal = $('#ModalCategoria');
   var title = $('#exampleModalLabel');
-  var modo = categoriaID ? 'editar' : 'crear'; // Define the modo variable
+  var modo = categoriaID ? 'editar' : 'crear'; // Define la variable para cambiar el titulo del modal segun el boton que presiona.
 
   // Llamada AJAX para obtener la categoría con el ID recibido como argumento
   $.get('../../Categorias/BuscarCategorias', { categoriaID: categoriaID })
@@ -92,7 +92,7 @@ function BuscarCategoria(categoriaID) {
         $("#Descripcion").val(categoria.descripcion);
         $("#CategoriaID").val(categoria.categoriaID);
 
-        // Cambiar el título del modal según el modo (editar o crear)
+        // Cambiar el título del modal según la variable modo (editar o crear)
         if (modo === 'editar') {
           title.text('Editar Categoría');
         } else {
@@ -111,7 +111,7 @@ function BuscarCategoria(categoriaID) {
 function DeshabilitarCategoria(categoriaID, button) {
   $.post('../../Categorias/DeshabilitarCategoria', { categoriaID: parseInt(categoriaID) })
     .done(function (resultado) {
-      // Si se realiza con éxito, se llama a la función BuscarCategorias() para actualizar la lista de categorías.
+      // Si se realiza con éxito, se llama a la función BuscarCategorias() para actualizar la tabla de categorías.
       resultado ? BuscarCategorias() : $(button).text('Error');
     })
     .fail(function (xhr, status) {
