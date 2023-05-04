@@ -27,6 +27,12 @@ public class CategoriasController : Controller
     {
         var categorias = _contexto.Categorias.OrderBy(c => c.Descripcion).ToList();
 
+        if (!User.Identity.IsAuthenticated)
+        {
+        // Si el usuario no está autenticado, filtrar solo las categorías permitidas
+        categorias = _contexto.Categorias.OrderBy(c => c.Descripcion).Where(c => c.Eliminado == false).ToList();
+        }
+
         if (categoriaID > 0)
         {
             categorias = categorias.Where(c => c.CategoriaID == categoriaID).OrderBy(c => c.Descripcion).ToList();

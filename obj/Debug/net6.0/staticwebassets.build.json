@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "O5KMQNg62x4gxyMz6HSrpFa5ypaQrw0FeJ78sa6Rw8g=",
+  "Hash": "1nERac+8z2t6GUUM3EloXWV2LJmuSWb/RB+JX7M9wMU=",
   "Source": "ProyectoX",
   "BasePath": "_content/ProyectoX",
   "Mode": "Default",
@@ -1120,40 +1120,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\3.jpg"
-    },
-    {
-      "Identity": "C:\\Users\\Matias\\Documents\\ProyectoX\\wwwroot\\css\\4.jpg",
-      "SourceId": "ProyectoX",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Matias\\Documents\\ProyectoX\\wwwroot\\",
-      "BasePath": "_content/ProyectoX",
-      "RelativePath": "css/4.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\4.jpg"
-    },
-    {
-      "Identity": "C:\\Users\\Matias\\Documents\\ProyectoX\\wwwroot\\css\\5.jpg",
-      "SourceId": "ProyectoX",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Matias\\Documents\\ProyectoX\\wwwroot\\",
-      "BasePath": "_content/ProyectoX",
-      "RelativePath": "css/5.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\5.jpg"
     },
     {
       "Identity": "C:\\Users\\Matias\\Documents\\ProyectoX\\wwwroot\\css\\site.css",

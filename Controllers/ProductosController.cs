@@ -34,6 +34,12 @@ public class ProductosController : Controller
         // busca los productos en categorias habilitadas y las ordena por descripcion
         var Productos = _contexto.Productos.Include(p => p.Categoria).Where(p => p.Categoria.Eliminado == false).OrderBy(p => p.Descripcion).ToList();
 
+        if (!User.Identity.IsAuthenticated)
+        {
+        // Si el usuario no está autenticado, filtrar solo las categorías permitidas
+        Productos = _contexto.Productos.Include(p => p.Categoria).Where(p => p.Categoria.Eliminado == false).Where(p => p.Eliminado == false).OrderBy(p => p.Descripcion).ToList();
+        }
+
         if (ProductoID > 0)
         {
             Productos = Productos.Where(p => p.ProductoID == ProductoID).OrderBy(p => p.Descripcion).ToList();
