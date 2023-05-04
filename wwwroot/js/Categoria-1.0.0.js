@@ -83,21 +83,23 @@ function BuscarCategoria(categoriaID) {
   var title = $('#exampleModalLabel');
   var modo = categoriaID ? 'editar' : 'crear'; // Define the modo variable
 
+  // Llamada AJAX para obtener la categoría con el ID recibido como argumento
   $.get('../../Categorias/BuscarCategorias', { categoriaID: categoriaID })
     .done(function (categorias) {
       if (categorias.length == 1) {
         let categoria = categorias[0];
+        // Llenar los campos del formulario con la información de la categoría obtenida
         $("#Descripcion").val(categoria.descripcion);
         $("#CategoriaID").val(categoria.categoriaID);
 
-        // Change modal title based on mode
+        // Cambiar el título del modal según el modo (editar o crear)
         if (modo === 'editar') {
           title.text('Editar Categoría');
         } else {
           title.text('Agregar Categoría');
         }
 
-        // Show modal
+        // Mostrar el modal
         modal.modal('show');
       }
     })
@@ -105,89 +107,91 @@ function BuscarCategoria(categoriaID) {
       alert('Error al cargar categorias');
     });
 }
-
-// esta función recibe un ID de categoría como argumento y realiza una llamada AJAX para deshabilitar esa categoría en la base de datos.
+// Esta función recibe un ID de categoría como argumento y realiza una llamada AJAX para deshabilitar esa categoría en la base de datos.
 function DeshabilitarCategoria(categoriaID, button) {
   $.post('../../Categorias/DeshabilitarCategoria', { categoriaID: parseInt(categoriaID) })
     .done(function (resultado) {
+      // Si se realiza con éxito, se llama a la función BuscarCategorias() para actualizar la lista de categorías.
       resultado ? BuscarCategorias() : $(button).text('Error');
     })
     .fail(function (xhr, status) {
+      // Si hay un error, se muestra un mensaje y se redirige a la página de inicio de sesión.
       $(button).html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
     });
 }
 
-// esta función recibe un ID de categoría como argumento y realiza una llamada AJAX para habilitar esa categoría en la base de datos.
+// Esta función recibe un ID de categoría como argumento y realiza una llamada AJAX para habilitar esa categoría en la base de datos.
 function HabilitarCategoria(categoriaID, button) {
   $.post('../../Categorias/HabilitarCategoria', { categoriaID: categoriaID })
     .done(function (resultado) {
+      // Si se realiza con éxito, se llama a la función BuscarCategorias() para actualizar la lista de categorías.
       resultado ? BuscarCategorias() : $(button).text('Error');
     })
     .fail(function () {
+      // Si hay un error, se muestra un mensaje y se redirige a la página de inicio de sesión.
       $(button).html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
     });
 }
 
+// Esta función muestra el modal para eliminar una categoría y envía una solicitud POST al servidor para eliminarla si el usuario lo confirma.
 function EliminarCategoria(categoriaID) {
-  // Show confirmation modal
+  // Mostrar modal de confirmación
   $('#confirm-delete-modal').modal('show');
 
-  // Add event listener to delete button in modal
+  // Agregar un event listener al botón de eliminar en el modal
   $('#confirm-delete-btn').click(function () {
-    // Send post request to server to delete the category
+    // Enviar solicitud POST al servidor para eliminar la categoría
     $.post('../../Categorias/EliminarCategoria', { categoriaID: parseInt(categoriaID) })
       .done(function (resultado) {
         if (resultado.success) {
-          // Display success message inside modal
+          // Mostrar mensaje de éxito dentro del modal
           $('#confirm-delete-modal .modal-body').html('<p class="text-success">La categoría se ha eliminado correctamente.</p>');
 
-          // Wait for 1 second before closing the modal
+          // Esperar 850ms antes de cerrar el modal para dar tiempo a leer el mensaje
           setTimeout(function () {
-            // Hide the modal
+            // Ocultar el modal
             $('#confirm-delete-modal').modal('hide');
 
-            // Fade out the row before removing it from the table
+            // Transicion de desvanecer antes de eliminar la fila de la tabla
             $('#tbody-categorias tr').filter(`[data-id='${categoriaID}']`).fadeOut('slow', function () {
               $(this).remove();
             });
 
-            // Wait for another 1 second before refreshing the list of categories
+            // Esperar otro segundo antes de actualizar la lista de categorías para que se vea al desvanecer la fila
             setTimeout(function () {
               BuscarCategorias();
             }, 1000);
           }, 850);
         } else {
-          // Display error message inside modal
+          // Mostrar mensaje de error dentro del modal
           $('#confirm-delete-modal .modal-body').html('<p class="text-danger">' + resultado.message + '</p>');
         }
       })
       .fail(function (xhr, status) {
+        // Mostrar mensaje de inicio de sesión dentro del modal
         $('#confirm-delete-modal .modal-body').html('<p>Primero debe iniciar sesión.</p>');
         $('#confirm-delete-btn').html('<a class="nav-link text-light" href="/Identity/Account/Login">Iniciar sesión</a>');
       });
   });
 
-  // Add event listener to modal hidden event
+  // Agregar event listener al evento de ocultar el modal
   $('#confirm-delete-modal').on('hidden.bs.modal', function () {
-    // Reset modal content to default
-    $('#confirm-delete-modal .modal-body').html('<p>¿Está seguro que desea eliminar este producto?</p>');
+    // Restablecer el contenido del modal a su valor predeterminado para la proxima vez que se quiera eliminar una categoria sin reiniciar la pagina ya que usamos ajax.
+    $('#confirm-delete-modal .modal-body').html('<p>¿Está seguro que desea eliminar esta categoría?</p>');
   });
 }
-
-
-
-// esta función limpia los campos del modal.
+// Esta función limpia los campos del modal de categorías.
 function VaciarFormulario() {
   var title = $('#exampleModalLabel');
-  title.text('Agregar Categoría');
+  title.text('Agregar Categoría'); // Establece el título del modal como "Agregar Categoría".
 
-  // Clear form fields
-  $("#Descripcion").val('');
-  $("#CategoriaID").val(0);
-  document.getElementById("DescripcionError").textContent = "";
+  // Limpia los campos del formulario dentro del modal.
+  $("#Descripcion").val(''); // Limpia el campo "Descripción".
+  $("#CategoriaID").val(0); // Establece el valor del campo "CategoriaID" en 0.
+  document.getElementById("DescripcionError").textContent = ""; // Limpia cualquier mensaje de error que pueda haber en el campo "Descripción".
 }
 
+// Agrega un listener para cuando el modal de categorías se muestre en la pantalla.
 $('#ModalCategoria').on('shown.bs.modal', function () {
-  $('#Descripcion').focus();
+  $('#Descripcion').focus(); // Pone el foco en el campo "Descripción" para que el usuario pueda empezar a escribir inmediatamente.
 });
-
