@@ -71,7 +71,7 @@
         </div>
     }
     <table
-        class="table table-bordered table-striped table-condensed glass-bg table-responsive table-rounded table-hover">
+        class="table table-bordered glass-bg">
         <thead>
             <div class="form-group">
                 <div class="input-group">
@@ -94,4 +94,9 @@
 
 @section Scripts{
     <script src="~/js/categoria-1.0.0.js"></script>
+    <script>
+        // fondo de inicio random
+        var randomNum = Math.floor(Math.random() * 3) + 1;
+        document.body.style.backgroundImage = "url('css/" + randomNum + ".jpg')";
+    </script>
 }
