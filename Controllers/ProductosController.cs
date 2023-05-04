@@ -29,21 +29,27 @@ public class ProductosController : Controller
 
     public JsonResult BuscarProductos(int ProductoID = 0)
     {
+        // Inicializa una lista vacía que almacenará los productos a mostrar
         List<VistaProducto> ProductosMostrar = new List<VistaProducto>();
 
-        // busca los productos en categorias habilitadas y las ordena por descripcion
+        // Busca todos los productos en categorías habilitadas y los ordena por descripción
         var Productos = _contexto.Productos.Include(p => p.Categoria).Where(p => p.Categoria.Eliminado == false).OrderBy(p => p.Descripcion).ToList();
 
+        // Si el usuario no está autenticado, solo mostrar productos habilitados
         if (!User.Identity.IsAuthenticated)
         {
-        // Si el usuario no está autenticado, filtrar solo las categorías permitidas
-        Productos = _contexto.Productos.Include(p => p.Categoria).Where(p => p.Categoria.Eliminado == false).Where(p => p.Eliminado == false).OrderBy(p => p.Descripcion).ToList();
+            // Filtra los productos habilitados en categorías habilitadas
+            Productos = _contexto.Productos.Include(p => p.Categoria).Where(p => p.Categoria.Eliminado == false).Where(p => p.Eliminado == false).OrderBy(p => p.Descripcion).ToList();
         }
 
+        // Si el parámetro ProductoID es mayor que cero, filtra la lista de productos para incluir solo el producto con el ID especificado
         if (ProductoID > 0)
         {
             Productos = Productos.Where(p => p.ProductoID == ProductoID).OrderBy(p => p.Descripcion).ToList();
         }
+
+        // Itera sobre los productos encontrados y crea una instancia de VistaProducto para cada uno, agregándolos a la lista ProductosMostrar
+        // Esta instancia es creada para que en la vista de los productos se pueda ver la descripcion de la categoria a la que corresponde.
         foreach (var Producto in Productos)
         {
             var ProductoMostrar = new VistaProducto
@@ -53,20 +59,22 @@ public class ProductosController : Controller
                 CategoriaID = Producto.CategoriaID,
                 CategoriaDescripcion = Producto.Categoria.Descripcion,
                 Eliminado = Producto.Eliminado
-
             };
             ProductosMostrar.Add(ProductoMostrar);
         }
 
+        // Devuelve la lista ProductosMostrar en formato JSON
         return Json(ProductosMostrar);
     }
 
+    // Este método busca todas las categorías disponibles en la base de datos y las ordena alfabéticamente por su descripción para mostrarlas en el selector del modal en orden.
     public JsonResult BuscarCategorias()
     {
         var categorias = _contexto.Categorias.OrderBy(c => c.Descripcion).ToList();
         return Json(categorias);
     }
 
+    // Guarda o edita un producto
     [Authorize]
     public JsonResult GuardarProducto(int productoID, string descripcion, int categoriaID)
     {
@@ -80,9 +88,11 @@ public class ProductosController : Controller
                 // crea un nuevo producto
                 if (productoID == 0)
                 {
+                    // comprueba que la descripcion del producto no exista ya en la base de datos
                     var productoOriginal = _contexto.Productos.Where(p => p.Descripcion == descripcion && p.ProductoID != productoID).FirstOrDefault();
                     if (productoOriginal == null)
                     {
+                        // crea un nuevo producto y lo agrega a la base de datos
                         var productoGuardar = new Producto
                         {
                             Descripcion = descripcion,
@@ -90,11 +100,11 @@ public class ProductosController : Controller
                         };
                         _contexto.Add(productoGuardar);
                         _contexto.SaveChanges();
-                        resultado = 0;
+                        resultado = 0; // éxito
                     }
                     else
                     {
-                        resultado = 1;
+                        resultado = 1; // la descripcion del producto ya existe
                     }
                 }
                 else
@@ -104,46 +114,54 @@ public class ProductosController : Controller
                     var productoOriginal = _contexto.Productos.Where(p => p.Descripcion == descripcion && p.ProductoID != productoID).FirstOrDefault();
                     if (productoOriginal == null)
                     {
+                        // obtiene el producto a editar
                         var productoEditar = _contexto.Productos.Find(productoID);
                         if (productoEditar != null)
                         {
+                            // actualiza la información del producto
                             productoEditar.Descripcion = descripcion;
                             productoEditar.CategoriaID = categoriaID;
                             _contexto.SaveChanges();
-                            resultado = 0;
+                            resultado = 0; // éxito
                         }
                     }
                     else
                     {
-                        resultado = 1;
+                        resultado = 1; // la descripcion del producto ya existe
                     }
                 }
             }
             else
             {
-                resultado = 2;
+                resultado = 2; // la descripcion del producto está vacía
             }
 
         }
         else
         {
-            resultado = 3;
+            resultado = 3; // la categoría no es válida
         }
-
+        // retorna un resultado en JSON indicando el éxito o la razón del fallo
         return Json(resultado);
     }
 
     [Authorize]
 
+    // Método para deshabilitar un producto en la base de datos según su ID.
     public JsonResult DeshabilitarProducto(int productoID)
     {
         bool resultado = true;
+
+        // Verifica que el ID del producto no sea 0.
         if (productoID != 0)
         {
-            //crear variable que guarde el objeto segun el id deseado
+            // Busca el producto en la base de datos según su ID.
             var productoDeshabilitar = _contexto.Productos.Find(productoID);
+
+            // Verifica que el producto existe en la base de datos.
             if (productoDeshabilitar != null)
             {
+                // Actualiza el estado del producto a "Eliminado" / "Deshabilitado".
                 productoDeshabilitar.Eliminado = true;
                 _contexto.SaveChanges();
                 resultado = true;
@@ -156,16 +174,22 @@ public class ProductosController : Controller
         return Json(resultado);
     }
 
+    // Método para habilitar un producto en la base de datos según su ID.
     [Authorize]
-
     public JsonResult HabilitarProducto(int productoID)
     {
         bool resultado = true;
+
+        // Verifica que el ID del producto no sea 0.
         if (productoID != 0)
         {
+            // Busca el producto en la base de datos según su ID.
             var productoHabilitar = _contexto.Productos.Find(productoID);
+
+            // Verifica que el producto existe en la base de datos.
             if (productoHabilitar != null)
             {
+                // Actualiza el estado del producto a "No Eliminado" / "Habilitado".
                 productoHabilitar.Eliminado = false;
                 _contexto.SaveChanges();
                 resultado = true;
@@ -178,16 +202,18 @@ public class ProductosController : Controller
         return Json(resultado);
     }
 
+
     [Authorize]
     public JsonResult EliminarProducto(int productoID)
     {
         bool resultado = true;
         if (productoID != 0)
         {
+            // obtiene los servicios asociados al producto
             var serviciosEnProducto = (from a in _contexto.Servicios where a.ProductoID == productoID select a).ToList();
             if (serviciosEnProducto.Count == 0)
             {
-
+                // si no hay servicios asociados, procede a eliminar el producto
                 var productoEliminar = _contexto.Productos.Find(productoID);
                 if (productoEliminar != null)
                 {
@@ -199,6 +225,7 @@ public class ProductosController : Controller
             else
             {
                 resultado = false;
+                // devuelve un mensaje de error si hay servicios asociados al producto
                 return Json(new { success = false, message = "La categoría no se puede eliminar porque tiene servicios asociados." });
             }
         }
@@ -206,6 +233,8 @@ public class ProductosController : Controller
         {
             resultado = false;
         }
+        // devuelve el resultado de la operación
         return Json(resultado);
     }
+
 }
