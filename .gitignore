@@ -1,7 +1,10 @@
+# Prerequisites
+*.d
+
 # Object files
 *.o
 *.ko
-*obj
+*.obj
 *.elf
 
 # Linker output
@@ -48,27 +51,6 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-#Carpetas que no se suben
-*bin
-*vscode
-*obj/Debug/net6.0
-obj/Debug/net6.0/project.razor.json
-obj/Debug/net6.0/ProyectoX.assets.cache
-obj/Debug/net6.0/ProyectoX.GeneratedMSBuildEditorConfig.editorconfig
-bin/Debug/net6.0/ProyectoX.dll
-bin/Debug/net6.0/ProyectoX.pdb
-bin/Debug/net6.0/ProyectoX.dll
-bin/Debug/net6.0/ProyectoX.pdb
-bin/Debug/net6.0/ProyectoX.staticwebassets.runtime.json
-obj/project.assets.json
-obj/project.nuget.cache
-obj/ProyectoX.csproj.nuget.dgspec.json
-obj/ProyectoX.csproj.nuget.g.props
-obj/Debug/net6.0/ProyectoX.assets.cache
-obj/Debug/net6.0/ProyectoX.csproj.FileListAbsolute.txt
-obj/Debug/net6.0/ProyectoX.dll
-obj/Debug/net6.0/ProyectoX.GeneratedMSBuildEditorConfig.editorconfig
-obj/Debug/net6.0/ProyectoX.genruntimeconfig.cache
-obj/Debug/net6.0/ProyectoX.pdb
-obj/Debug/net6.0/staticwebassets.build.json
-obj/Debug/net6.0/staticwebassets.development.json
+/bin/
+/obj/
+/.vscode
